@@ -5,24 +5,34 @@ import MainScreen from "../main-screen/main-screen";
 import SignInScreen from "../sign-in-screen/sign-in-screen";
 import FavoritesScreen from "../favorites-screen/favorites-screen";
 import RoomScreen from "../room-screen/room-screen";
+import {offersPropType, reviewsPropType} from "../../utils/common";
 
 const App = (props) => {
-  const {placesCount} = props;
+  const {placesCount, offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreen placesCount={placesCount} />
+          <MainScreen
+            placesCount={placesCount}
+            offers={offers}
+          />
         </Route>
         <Route exact path="/login">
           <SignInScreen />
         </Route>
         <Route exact path="/favorites">
-          <FavoritesScreen />
+          <FavoritesScreen
+            offers={offers}
+          />
         </Route>
         <Route exact path="/offer/:id">
-          <RoomScreen />
+          <RoomScreen
+            offer={offers[0]}
+            nearOffers={offers}
+            reviews={reviews}
+          />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -31,6 +41,8 @@ const App = (props) => {
 
 App.propTypes = {
   placesCount: PropTypes.number.isRequired,
+  offers: offersPropType.isRequired,
+  reviews: reviewsPropType.isRequired,
 };
 
 export default App;
