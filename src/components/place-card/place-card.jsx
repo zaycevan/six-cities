@@ -4,25 +4,36 @@ import {Link} from "react-router-dom";
 import {offerPropType} from "../../utils/common";
 
 const PlaceCard = (props) => {
-  const {onCard, offer} = props;
-  const {id, premium, photos, price, rating, title, type} = offer;
+  const {offer, onCard, placeCardClassName, imageWrapperClassName, infoClassName, imageWidth, imageHeight, showPremium} = props;
+  const {id, isPremium, photos, price, rating, title, type} = offer;
+  const isOnCard = () => {
+    if (onCard) {
+      return onCard(offer);
+    }
+    return null;
+  };
 
   return (
-    <article className="cities__place-card place-card"
+    <article className={`${placeCardClassName} place-card`}
       id={id}
       onMouseEnter = {(evt) => {
         evt.preventDefault();
-        onCard(offer);
+        isOnCard();
       }}>
-      <div className="place-card__mark">
-        <span>{premium}</span>
-      </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      {showPremium &&
+        <div>{isPremium &&
+          <div className="place-card__mark">
+            <span>Premium</span>
+          </div>
+        }
+        </div>
+      }
+      <div className={`${imageWrapperClassName} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={photos[0]} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={photos[0]} width={`${imageWidth}`} height={`${imageHeight}`} alt="Place image"/>
         </Link>
       </div>
-      <div className="place-card__info">
+      <div className={`${infoClassName} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{price}</b>
@@ -37,7 +48,7 @@ const PlaceCard = (props) => {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: `80%`}}>{rating}</span>
+            <span style={{width: `${100 * rating / 5}%`}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
@@ -53,8 +64,14 @@ const PlaceCard = (props) => {
 };
 
 PlaceCard.propTypes = {
-  onCard: PropTypes.func.isRequired,
   offer: offerPropType.isRequired,
+  onCard: PropTypes.func,
+  placeCardClassName: PropTypes.string.isRequired,
+  imageWrapperClassName: PropTypes.string.isRequired,
+  infoClassName: PropTypes.string.isRequired,
+  imageWidth: PropTypes.string.isRequired,
+  imageHeight: PropTypes.string.isRequired,
+  showPremium: PropTypes.bool.isRequired,
 };
 
 export default PlaceCard;

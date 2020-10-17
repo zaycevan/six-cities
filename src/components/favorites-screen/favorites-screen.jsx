@@ -61,6 +61,7 @@ class FavoritesScreen extends PureComponent {
                       <FavoritePlaceCard
                         key={offer.id}
                         offer={offer}
+
                       />))
                     }
                   </div>

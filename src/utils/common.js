@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import moment from "moment";
-import {housingType} from "../const";
+import {HousingType} from "../const";
 
 export const getRandomInteger = (a = 0, b = 1) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -31,8 +31,8 @@ export const offerPropType = PropTypes.shape({
   photos: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  premium: PropTypes.string.isRequired,
-  type: PropTypes.oneOf([housingType.APARTMENT, housingType.ROOM, housingType.HOUSE, housingType.HOTEL]).isRequired,
+  isPremium: PropTypes.bool.isRequired,
+  type: PropTypes.oneOf([HousingType.APARTMENT, HousingType.ROOM, HousingType.HOUSE, HousingType.HOTEL]).isRequired,
   rating: PropTypes.number.isRequired,
   bedroomsCount: PropTypes.number.isRequired,
   maxGuestsCount: PropTypes.number.isRequired,

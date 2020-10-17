@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import PlaceCard from "../place-card/place-card";
+import MainPlaceCard from "../main-place-card/main-place-card";
 import {offersPropType} from "../../utils/common";
 
 class PlacesList extends PureComponent {
@@ -17,7 +17,7 @@ class PlacesList extends PureComponent {
     return (
       <div className="cities__places-list places__list tabs__content">
         {offers.map((offer) => (
-          <PlaceCard
+          <MainPlaceCard
             key={offer.id}
             offer={offer}
             onCard={() => {
