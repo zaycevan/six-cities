@@ -1,9 +1,8 @@
-import React, {PureComponent} from "react";
-import {offersPropType} from "../../utils/prop-types";
+import {offersPropType} from "utils/prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-class Map extends PureComponent {
+class Map extends React.PureComponent {
   constructor(props) {
     super(props);
 

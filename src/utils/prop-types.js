@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import {HousingType} from "../const";
 
 export const offerPropType = PropTypes.shape({

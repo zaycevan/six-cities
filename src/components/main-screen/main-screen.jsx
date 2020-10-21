@@ -1,9 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import PlacesList from "../places-list/places-list";
-import Map from "../map/map";
-import {offersPropType} from "../../utils/prop-types";
+import PlacesList from "components/places-list/places-list";
+import Map from "components/map/map";
+import {offersPropType} from "utils/prop-types";
 
 const MainScreen = (props) => {
   const {placesCount, offers} = props;
