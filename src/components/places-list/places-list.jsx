@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import MainPlaceCard from "../main-place-card/main-place-card";
-import {offersPropType} from "../../utils/common";
+import {offersPropType} from "../../utils/prop-types";
 
 class PlacesList extends PureComponent {
   constructor(props) {

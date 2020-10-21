@@ -1,7 +1,7 @@
 import React, {PureComponent} from "react";
 import {Link} from "react-router-dom";
 import FavoritePlaceCard from "../favorite-place-card/favorite-place-card";
-import {offersPropType} from "../../utils/common";
+import {offersPropType} from "../../utils/prop-types";
 
 
 class FavoritesScreen extends PureComponent {

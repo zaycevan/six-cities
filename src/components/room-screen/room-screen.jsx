@@ -2,7 +2,8 @@ import React, {PureComponent} from "react";
 import {Link} from "react-router-dom";
 import NearPlaceCard from "../near-place-card/near-place-card";
 import ReviewFrom from "../review-form/review-form";
-import {getPluralWord, formatReviewDate, offerPropType, offersPropType, reviewsPropType} from "../../utils/common";
+import {getPluralWord, formatReviewDate} from "../../utils/common";
+import {offerPropType, offersPropType, reviewsPropType} from "../../utils/prop-types";
 
 class RoomScreen extends PureComponent {
   constructor(props) {
