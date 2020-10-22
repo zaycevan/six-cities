@@ -1,11 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {Switch, Route, BrowserRouter} from "react-router-dom";
-import MainScreen from "../main-screen/main-screen";
-import SignInScreen from "../sign-in-screen/sign-in-screen";
-import FavoritesScreen from "../favorites-screen/favorites-screen";
-import RoomScreen from "../room-screen/room-screen";
-import {offersPropType, reviewsPropType} from "../../utils/common";
+import MainScreen from "components/main-screen/main-screen";
+import SignInScreen from "components/sign-in-screen/sign-in-screen";
+import FavoritesScreen from "components/favorites-screen/favorites-screen";
+import RoomScreen from "components/room-screen/room-screen";
+import {offersPropType, reviewsPropType} from "utils/prop-types";
 
 const App = (props) => {
   const {placesCount, offers, reviews} = props;

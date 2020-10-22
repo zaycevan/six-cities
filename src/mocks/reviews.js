@@ -1,4 +1,4 @@
-import {getRandomInteger} from "../utils/common";
+import {getRandomInteger} from "utils/common";
 
 const AVATAR_URL = `https://api.adorable.io/avatars/128`;
 

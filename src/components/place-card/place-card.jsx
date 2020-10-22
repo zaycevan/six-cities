@@ -1,7 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import {offerPropType} from "../../utils/common";
+import {offerPropType} from "utils/prop-types";
 
 const PlaceCard = (props) => {
   const {offer, onCard, placeCardClassName, imageWrapperClassName, infoClassName, imageWidth, imageHeight, showPremium} = props;

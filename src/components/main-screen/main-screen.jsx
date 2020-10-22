@@ -1,8 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
 import {Link} from "react-router-dom";
-import PlacesList from "../places-list/places-list";
-import {offersPropType} from "../../utils/common";
+import PlacesList from "components/places-list/places-list";
+import Map from "components/map/map";
+import {offersPropType} from "utils/prop-types";
 
 const MainScreen = (props) => {
   const {placesCount, offers} = props;
@@ -95,7 +94,9 @@ const MainScreen = (props) => {
               />
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <Map
+                offers={offers}
+              />
             </div>
           </div>
         </div>

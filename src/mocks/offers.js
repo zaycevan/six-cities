@@ -1,5 +1,5 @@
 import {HousingType} from "../const";
-import {getRandomInteger} from "../utils/common";
+import {getRandomInteger} from "utils/common";
 
 const generateReviewsId = () => {
   const randomReviewsId = new Set();
@@ -28,6 +28,7 @@ export default [
     maxGuestsCount: getRandomInteger(2, 6),
     price: getRandomInteger(70, 300),
     amenities: [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`, `Baby seat`],
+    coordinates: [52.3909553943508, 4.85309666406198],
     hostInformation: {
       avatar: `https://a0.muscache.com/im/pictures/user/9705ae17-cd68-4a1b-8668-46611c1811e7.jpg?im_w=240`,
       name: `Philip`,
@@ -48,6 +49,7 @@ export default [
     maxGuestsCount: getRandomInteger(2, 6),
     price: getRandomInteger(70, 300),
     amenities: [`wifi`, `dishwasher`, `Iron`, `TV`, `Washer`],
+    coordinates: [52.369553943508, 4.85309666406198],
     hostInformation: {
       avatar: `https://a0.muscache.com/im/users/1232843/profile_pic/1317483378/original.jpg?im_w=720`,
       name: `Harm`,
@@ -67,6 +69,7 @@ export default [
     maxGuestsCount: getRandomInteger(2, 6),
     price: getRandomInteger(70, 300),
     amenities: [`wifi`, `Heating`, `Hair dryer`, `Laptop`],
+    coordinates: [52.3909553943508, 4.929309666406198],
     hostInformation: {
       avatar: `https://a0.muscache.com/im/pictures/user/4af95a33-57b7-4f36-bc28-df74de058cc7.jpg?im_w=720`,
       name: `Erwin`,
@@ -86,6 +89,7 @@ export default [
     maxGuestsCount: getRandomInteger(2, 6),
     price: getRandomInteger(70, 300),
     amenities: [`wifi`, `Heating`, `TV`],
+    coordinates: [52.3809553943508, 4.939309666406198],
     hostInformation: {
       avatar: `https://a0.muscache.com/im/pictures/user/2f3dfed9-fe3f-48d7-86dc-acf077d25711.jpg?im_w=720`,
       name: `Dario`,

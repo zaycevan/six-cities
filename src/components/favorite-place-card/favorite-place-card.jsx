@@ -1,5 +1,4 @@
-import React from "react";
-import PlaceCard from "../place-card/place-card";
+import PlaceCard from "components/place-card/place-card";
 
 const FavoritePlaceCard = (props) => {
 

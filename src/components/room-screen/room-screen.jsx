@@ -1,10 +1,10 @@
-import React, {PureComponent} from "react";
 import {Link} from "react-router-dom";
-import NearPlaceCard from "../near-place-card/near-place-card";
-import ReviewFrom from "../review-form/review-form";
-import {getPluralWord, formatReviewDate, offerPropType, offersPropType, reviewsPropType} from "../../utils/common";
+import NearPlaceCard from "components/near-place-card/near-place-card";
+import ReviewFrom from "components/review-form/review-form";
+import {getPluralWord, formatReviewDate} from "utils/common";
+import {offerPropType, offersPropType, reviewsPropType} from "utils/prop-types";
 
-class RoomScreen extends PureComponent {
+class RoomScreen extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -17,10 +17,7 @@ class RoomScreen extends PureComponent {
     const {offer, nearOffers, reviews} = this.props;
     const {id, photos, title, description, premium, type, rating, bedroomsCount, maxGuestsCount, price, amenities, hostInformation, reviewsId} = offer;
     const offerReviews = reviews.filter((review) => reviewsId.includes(review.id));
-
-    if (photos.length > 6) {
-      photos.length = 6;
-    }
+    const PHOTO_COUNTS = 6;
 
     return (
       <div className="page">
@@ -51,7 +48,7 @@ class RoomScreen extends PureComponent {
           <section className="property" id={id}>
             <div className="property__gallery-container container">
               <div className="property__gallery">
-                {photos.map((photo, i) => (
+                {photos.slice(0, PHOTO_COUNTS).map((photo, i) => (
                   <div key={`${i}-${photo}`} className="property__image-wrapper">
                     <img className="property__image" src={photo} alt="Photo studio"/>
                   </div>
