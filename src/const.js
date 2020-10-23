@@ -5,8 +5,9 @@ export const HousingType = {
   HOTEL: `Hotel`
 };
 
-export const CardType = {
+export const PageType = {
   MAIN: `Main`,
   FAVORITE: `Favorite`,
   NEAR: `Near`,
 };
+

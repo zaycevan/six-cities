@@ -1,5 +1,5 @@
 import {HousingType} from "../const";
-import {getRandomInteger} from "utils/common";
+import {getRandomInteger} from "@utils/common";
 
 const generateReviewsId = () => {
   const randomReviewsId = new Set();

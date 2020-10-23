@@ -1,7 +1,8 @@
 import {Link} from "react-router-dom";
-import PlacesList from "components/places-list/places-list";
-import Map from "components/map/map";
-import {offersPropType} from "utils/prop-types";
+import PlacesList from "@components/places-list/places-list";
+import Map from "@components/map/map";
+import {offersPropType} from "@utils/prop-types";
+import {PageType} from "@src/const";
 
 const MainScreen = (props) => {
   const {placesCount, offers} = props;
@@ -90,12 +91,15 @@ const MainScreen = (props) => {
                 </ul>
               </form>
               <PlacesList
+                placesListClassName="cities__places-list places__list tabs__content"
                 offers={offers}
+                type={PageType.MAIN}
               />
             </section>
             <div className="cities__right-section">
               <Map
                 offers={offers}
+                mapClassName="cities__map"
               />
             </div>
           </div>

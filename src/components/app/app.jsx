@@ -1,9 +1,9 @@
 import {Switch, Route, BrowserRouter} from "react-router-dom";
-import MainScreen from "components/main-screen/main-screen";
-import SignInScreen from "components/sign-in-screen/sign-in-screen";
-import FavoritesScreen from "components/favorites-screen/favorites-screen";
-import RoomScreen from "components/room-screen/room-screen";
-import {offersPropType, reviewsPropType} from "utils/prop-types";
+import MainScreen from "@components/main-screen/main-screen";
+import SignInScreen from "@components/sign-in-screen/sign-in-screen";
+import FavoritesScreen from "@components/favorites-screen/favorites-screen";
+import RoomScreen from "@components/room-screen/room-screen";
+import {offersPropType, reviewsPropType} from "@utils/prop-types";
 
 const App = (props) => {
   const {placesCount, offers, reviews} = props;
@@ -28,7 +28,7 @@ const App = (props) => {
         <Route exact path="/offer/:id">
           <RoomScreen
             offer={offers[0]}
-            nearOffers={offers}
+            nearOffers={offers.slice(0, 3)}
             reviews={reviews}
           />
         </Route>
