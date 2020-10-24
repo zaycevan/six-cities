@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
-import FavoritePlaceCard from "components/favorite-place-card/favorite-place-card";
-import {offersPropType} from "utils/prop-types";
-
+import PlacesList from "@components/places-list/places-list";
+import {offersPropType} from "@utils/prop-types";
+import {PageType} from "@src/const";
 
 class FavoritesScreen extends React.PureComponent {
   constructor(props) {
@@ -55,15 +55,11 @@ class FavoritesScreen extends React.PureComponent {
                       </a>
                     </div>
                   </div>
-                  <div className="favorites__places">
-                    {favotiteAmsterdamOffers.map((offer) => (
-                      <FavoritePlaceCard
-                        key={offer.id}
-                        offer={offer}
-
-                      />))
-                    }
-                  </div>
+                  <PlacesList
+                    placesListClassName="favorites__places"
+                    offers={favotiteAmsterdamOffers}
+                    type={PageType.FAVORITE}
+                  />
                 </li>
                 <li className="favorites__locations-items">
                   <div className="favorites__locations locations locations--current">
@@ -73,14 +69,11 @@ class FavoritesScreen extends React.PureComponent {
                       </a>
                     </div>
                   </div>
-                  <div className="favorites__places">
-                    {favotiteCologneOffers.map((offer) => (
-                      <FavoritePlaceCard
-                        key={offer.id}
-                        offer={offer}
-                      />))
-                    }
-                  </div>
+                  <PlacesList
+                    placesListClassName="favorites__places"
+                    offers={favotiteCologneOffers}
+                    type={PageType.FAVORITE}
+                  />
                 </li>
               </ul>
             </section>

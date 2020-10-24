@@ -1,4 +1,4 @@
-import {offersPropType} from "utils/prop-types";
+import {offersPropType} from "@utils/prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -45,15 +45,17 @@ class Map extends React.PureComponent {
   }
 
   render() {
+    const {mapClassName} = this.props;
 
     return (
-      <section id="map" className="cities__map map"></section>
+      <section id="map" className={`${mapClassName} map`}></section>
     );
   }
 }
 
 Map.propTypes = {
   offers: offersPropType.isRequired,
+  mapClassName: PropTypes.string.isRequired
 };
 
 export default Map;

@@ -1,8 +1,11 @@
 import {Link} from "react-router-dom";
-import NearPlaceCard from "components/near-place-card/near-place-card";
-import ReviewFrom from "components/review-form/review-form";
-import {getPluralWord, formatReviewDate} from "utils/common";
-import {offerPropType, offersPropType, reviewsPropType} from "utils/prop-types";
+import ReviewsList from "@components/reviews-list/reviews-list";
+import ReviewFrom from "@components/review-form/review-form";
+import Map from "@components/map/map";
+import PlacesList from "@components/places-list/places-list";
+import {getPluralWord} from "@utils/common";
+import {offerPropType, offersPropType, reviewsPropType} from "@utils/prop-types";
+import {PageType} from "@src/const";
 
 class RoomScreen extends React.PureComponent {
   constructor(props) {
@@ -15,7 +18,7 @@ class RoomScreen extends React.PureComponent {
 
   render() {
     const {offer, nearOffers, reviews} = this.props;
-    const {id, photos, title, description, premium, type, rating, bedroomsCount, maxGuestsCount, price, amenities, hostInformation, reviewsId} = offer;
+    const {id, photos, title, description, isPremium, type, rating, bedroomsCount, maxGuestsCount, price, amenities, hostInformation, reviewsId} = offer;
     const offerReviews = reviews.filter((review) => reviewsId.includes(review.id));
     const PHOTO_COUNTS = 6;
 
@@ -57,9 +60,11 @@ class RoomScreen extends React.PureComponent {
             </div>
             <div className="property__container container">
               <div className="property__wrapper">
-                <div className="property__mark">
-                  <span>{premium}</span>
-                </div>
+                {isPremium &&
+                  <div className="property__mark">
+                    <span>Premium</span>
+                  </div>
+                }
                 <div className="property__name-wrapper">
                   <h1 className="property__name">
                     {title}
@@ -121,52 +126,26 @@ class RoomScreen extends React.PureComponent {
                 </div>
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span></h2>
-                  <ul className="reviews__list">
-                    {offerReviews.map((offerReview) => (
-                      <li key={offerReview.id} className="reviews__item">
-                        <div className="reviews__user user">
-                          <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                            <img className="reviews__avatar user__avatar" src={offerReview.avatar} width="54" height="54" alt="Reviews avatar"/>
-                          </div>
-                          <span className="reviews__user-name">
-                            {offerReview.name}
-                          </span>
-                        </div>
-                        <div className="reviews__info">
-                          <div className="reviews__rating rating">
-                            <div className="reviews__stars rating__stars">
-                              <span style={{width: `${100 * offerReview.rating / 5}%`}}></span>
-                              <span className="visually-hidden">Rating</span>
-                            </div>
-                          </div>
-                          <p className="reviews__text">
-                            {offerReview.text}
-                          </p>
-                          <time className="reviews__time" dateTime={offerReview.date}>{formatReviewDate(offerReview.date)}</time>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
+                  <ReviewsList
+                    offerReviews={offerReviews}
+                  />
                   <ReviewFrom />
                 </section>
               </div>
             </div>
-            <section className="property__map map"></section>
+            <Map
+              offers={nearOffers}
+              mapClassName="property__map"
+            />
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
-              <div className="near-places__list places__list">
-                {nearOffers.map((nearOffer) => (
-                  <NearPlaceCard
-                    key={nearOffer.id}
-                    offer={nearOffer}
-                    onCard={() => {
-                      this.setState({activeCard: nearOffer});
-                    }}
-                  />
-                ))}
-              </div>
+              <PlacesList
+                placesListClassName="near-places__list places__list"
+                offers={nearOffers}
+                type={PageType.NEAR}
+              />
             </section>
           </div>
         </main>
