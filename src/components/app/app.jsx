@@ -6,16 +6,13 @@ import RoomScreen from "@components/room-screen/room-screen";
 import {offersPropType, reviewsPropType} from "@utils/prop-types";
 
 const App = (props) => {
-  const {placesCount, offers, reviews} = props;
+  const {offers, reviews} = props;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreen
-            placesCount={placesCount}
-            offers={offers}
-          />
+          <MainScreen />
         </Route>
         <Route exact path="/login">
           <SignInScreen />
@@ -38,7 +35,6 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  placesCount: PropTypes.number.isRequired,
   offers: offersPropType.isRequired,
   reviews: reviewsPropType.isRequired,
 };

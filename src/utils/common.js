@@ -7,6 +7,12 @@ export const getRandomInteger = (a = 0, b = 1) => {
   return Math.floor(lower + Math.random() * (upper - lower + 1));
 };
 
+export const getRandomItem = (array) => {
+  const randomIndex = getRandomInteger(0, array.length - 1);
+
+  return array[randomIndex];
+};
+
 export const getPluralWord = (value, one, two) => {
   let number = Math.abs(value);
 
@@ -23,3 +29,12 @@ export const formatReviewDate = (date) => {
   }
   return moment(date).format(`MMMM YYYY`);
 };
+
+export const extend = (a, b) => {
+  return Object.assign({}, a, b);
+};
+
+export const getOffersForCity = (city, offers) => {
+  return offers.filter((offer) => offer.city === city);
+};
+
