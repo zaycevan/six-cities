@@ -8,13 +8,6 @@ import {offerPropType, offersPropType, reviewsPropType} from "@utils/prop-types"
 import {PageType} from "@src/const";
 
 class RoomScreen extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: ``,
-    };
-  }
 
   render() {
     const {offer, nearOffers, reviews} = this.props;

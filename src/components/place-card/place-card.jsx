@@ -2,11 +2,17 @@ import {Link} from "react-router-dom";
 import {offerPropType} from "@utils/prop-types";
 
 const PlaceCard = (props) => {
-  const {offer, onCard, placeCardClassName, imageWrapperClassName, infoClassName, imageWidth, imageHeight, showPremium} = props;
+  const {offer, onActiveCard, outActiveCard, placeCardClassName, imageWrapperClassName, infoClassName, imageWidth, imageHeight, showPremium} = props;
   const {id, isPremium, photos, price, rating, title, type} = offer;
   const isOnCard = () => {
-    if (onCard) {
-      return onCard(offer);
+    if (onActiveCard) {
+      return onActiveCard(id);
+    }
+    return null;
+  };
+  const isOutCard = () => {
+    if (onActiveCard) {
+      return outActiveCard();
     }
     return null;
   };
@@ -14,9 +20,13 @@ const PlaceCard = (props) => {
   return (
     <article className={`${placeCardClassName} place-card`}
       id={id}
-      onMouseEnter = {(evt) => {
+      onMouseOver = {(evt) => {
         evt.preventDefault();
         isOnCard();
+      }}
+      onMouseOut = {(evt) => {
+        evt.preventDefault();
+        isOutCard();
       }}>
       {showPremium &&
         <div>{isPremium &&
@@ -63,7 +73,8 @@ const PlaceCard = (props) => {
 
 PlaceCard.propTypes = {
   offer: offerPropType.isRequired,
-  onCard: PropTypes.func,
+  onActiveCard: PropTypes.func,
+  outActiveCard: PropTypes.func,
   placeCardClassName: PropTypes.string.isRequired,
   imageWrapperClassName: PropTypes.string.isRequired,
   infoClassName: PropTypes.string.isRequired,

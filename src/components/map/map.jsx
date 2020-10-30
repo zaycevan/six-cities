@@ -1,45 +1,56 @@
+import {connect} from "react-redux";
 import {offersPropType} from "@utils/prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 class Map extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.map = null;
-    this.state = {
-    };
-  }
-
   _renderMap() {
     const city = [52.38333, 4.9];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
     });
+    const activeIcon = leaflet.icon({
+      iconUrl: `img/pin-active.svg`,
+      iconSize: [30, 30]
+    });
     const zoom = 12;
-    this.map = leaflet.map(`map`, {
+    this._map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
 
-    const {offers} = this.props;
+    const {offersForCity, activeCardId} = this.props;
 
-    this.map.setView(city, zoom);
+    let filteredOffers = offersForCity;
+    let activeOffer = null;
+
+    if (activeCardId) {
+      filteredOffers = offersForCity.filter((offer) => offer.id !== activeCardId);
+      activeOffer = offersForCity.find((offer) => offer.id === activeCardId);
+    }
+
+    this._map.setView(city, zoom);
 
     leaflet
       .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
         attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
       })
-      .addTo(this.map);
+      .addTo(this._map);
 
-    offers.forEach((offer) => {
+    filteredOffers.forEach((offer) => {
       leaflet
         .marker(offer.coordinates, {icon})
-        .addTo(this.map);
+        .addTo(this._map);
     });
+
+    if (activeOffer) {
+      leaflet
+        .marker(activeOffer.coordinates, {icon: activeIcon})
+        .addTo(this._map);
+    }
   }
 
   componentDidMount() {
@@ -47,7 +58,7 @@ class Map extends React.PureComponent {
   }
 
   componentDidUpdate() {
-    this.map.remove();
+    this._map.remove();
     this._renderMap();
   }
 
@@ -61,8 +72,15 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
-  offers: offersPropType.isRequired,
+  offersForCity: offersPropType.isRequired,
+  activeCardId: PropTypes.number,
   mapClassName: PropTypes.string.isRequired
 };
 
-export default Map;
+const mapStateToProps = (state) => ({
+  offersForCity: state.offersForCity,
+  activeCardId: state.activeCardId,
+});
+
+export {Map};
+export default connect(mapStateToProps)(Map);

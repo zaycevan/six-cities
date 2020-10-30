@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {ActionCreator} from "@store/action";
 import CitiesList from "@components/cities-list/cities-list";
+import SortList from "@components/sort-list/sort-list";
 import PlacesList from "@components/places-list/places-list";
 import Map from "@components/map/map";
 import {offersPropType} from "@utils/prop-types";
@@ -9,10 +10,10 @@ import {PageType} from "@src/const";
 
 const MainScreen = (props) => {
   const {
-    cities,
     currentCity,
     offersForCity,
-    onCity
+    currentSort,
+    onOpenSort
   } = props;
 
   return (
@@ -43,11 +44,7 @@ const MainScreen = (props) => {
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
-          <CitiesList
-            cities={cities}
-            currentCity={currentCity}
-            onCity={onCity}
-          />
+          <CitiesList />
         </div>
         <div className="cities">
           <div className="cities__places-container container">
@@ -56,28 +53,22 @@ const MainScreen = (props) => {
               <b className="places__found">{offersForCity.length} places to stay in {currentCity}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex="0">
-                  Popular
+                <span className="places__sorting-type" tabIndex="0"
+                  onClick={onOpenSort}>
+                  {currentSort}
                   <svg className="places__sorting-arrow" width="7" height="4">
                     <use xlinkHref="#icon-arrow-select"></use>
                   </svg>
                 </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li className="places__option places__option--active" tabIndex="0">Popular</li>
-                  <li className="places__option" tabIndex="0">Price: low to high</li>
-                  <li className="places__option" tabIndex="0">Price: high to low</li>
-                  <li className="places__option" tabIndex="0">Top rated first</li>
-                </ul>
+                <SortList />
               </form>
               <PlacesList
                 placesListClassName="cities__places-list places__list tabs__content"
-                offers={offersForCity}
                 type={PageType.MAIN}
               />
             </section>
             <div className="cities__right-section">
               <Map
-                offers={offersForCity}
                 mapClassName="cities__map"
               />
             </div>
@@ -89,23 +80,22 @@ const MainScreen = (props) => {
 };
 
 MainScreen.propTypes = {
-  cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   currentCity: PropTypes.string.isRequired,
   offersForCity: offersPropType.isRequired,
-  onCity: PropTypes.func.isRequired
+  currentSort: PropTypes.string.isRequired,
+  onOpenSort: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  cities: state.cities,
   currentCity: state.currentCity,
   offersForCity: state.offersForCity,
+  currentSort: state.currentSort,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onCity(city) {
-    dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.gettingOffers(city));
-  },
+  onOpenSort() {
+    dispatch(ActionCreator.openSort());
+  }
 });
 
 export {MainScreen};
