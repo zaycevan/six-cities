@@ -11,3 +11,9 @@ export const PageType = {
   NEAR: `Near`,
 };
 
+export const SortType = {
+  POPULAR: `Popular`,
+  PRICE_UP: `Price: low to high`,
+  PRICE_DOWN: `Price: high to low`,
+  TOP_RATED: `Top rated first`
+};

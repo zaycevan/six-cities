@@ -33,8 +33,3 @@ export const formatReviewDate = (date) => {
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };
-
-export const getOffersForCity = (city, offers) => {
-  return offers.filter((offer) => offer.city === city);
-};
-

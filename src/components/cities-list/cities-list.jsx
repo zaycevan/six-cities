@@ -1,5 +1,12 @@
+import {connect} from "react-redux";
+import {ActionCreator} from "@store/action";
+
 const CitiesList = (props) => {
-  const {cities, currentCity, onCity} = props;
+  const {
+    cities,
+    currentCity,
+    onCity
+  } = props;
 
   return (
     <section className="locations container">
@@ -27,4 +34,17 @@ CitiesList.propTypes = {
   onCity: PropTypes.func.isRequired,
 };
 
-export default CitiesList;
+const mapStateToProps = (state) => ({
+  cities: state.cities,
+  currentCity: state.currentCity,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onCity(city) {
+    dispatch(ActionCreator.changeCity(city));
+    dispatch(ActionCreator.gettingOffers(city));
+  },
+});
+
+export {CitiesList};
+export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

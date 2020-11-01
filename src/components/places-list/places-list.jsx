@@ -1,28 +1,22 @@
+import {connect} from "react-redux";
+import {ActionCreator} from "@store/action";
 import MainPlaceCard from "@components/main-place-card/main-place-card";
 import FavoritePlaceCard from "@components/favorite-place-card/favorite-place-card";
 import NearPlaceCard from "@components/near-place-card/near-place-card";
 import {offersPropType} from "@utils/prop-types";
 import {PageType} from "@src/const";
+import {getSortedOffers} from "@utils/offers";
 
 class PlacesList extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      activeCard: ``,
-    };
-  }
-
-  _getComponentByType(type, offer) {
+  _getComponentByType(type, offer, onActiveCard, outActiveCard) {
     switch (type) {
       case PageType.MAIN:
         return (
           <MainPlaceCard
             key={offer.id}
             offer={offer}
-            onCard={() => {
-              this.setState({activeCard: offer});
-            }}
+            onActiveCard={onActiveCard}
+            outActiveCard={outActiveCard}
           />
         );
       case PageType.FAVORITE:
@@ -37,9 +31,8 @@ class PlacesList extends React.PureComponent {
           <NearPlaceCard
             key={offer.id}
             offer={offer}
-            onCard={() => {
-              this.setState({activeCard: offer});
-            }}
+            onActiveCard={onActiveCard}
+            outActiveCard={outActiveCard}
           />
         );
       default:
@@ -48,12 +41,21 @@ class PlacesList extends React.PureComponent {
   }
 
   render() {
-    const {placesListClassName, offers, type} = this.props;
+    const {
+      placesListClassName,
+      offersForCity,
+      type,
+      currentSort,
+      onActiveCard,
+      outActiveCard
+    } = this.props;
+
+    const sortedOffers = getSortedOffers(currentSort, offersForCity);
 
     return (
       <div className={`${placesListClassName}`}>
-        {offers.map((offer) => (
-          this._getComponentByType(type, offer)
+        {sortedOffers.map((offer) => (
+          this._getComponentByType(type, offer, onActiveCard, outActiveCard)
         ))}
       </div>
     );
@@ -62,8 +64,26 @@ class PlacesList extends React.PureComponent {
 
 PlacesList.propTypes = {
   placesListClassName: PropTypes.string.isRequired,
-  offers: offersPropType.isRequired,
-  type: PropTypes.string.isRequired
+  offersForCity: offersPropType.isRequired,
+  type: PropTypes.string.isRequired,
+  currentSort: PropTypes.string.isRequired,
+  onActiveCard: PropTypes.func.isRequired,
+  outActiveCard: PropTypes.func.isRequired,
 };
 
-export default PlacesList;
+const mapStateToProps = (state) => ({
+  offersForCity: state.offersForCity,
+  currentSort: state.currentSort,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onActiveCard(activeCardId) {
+    dispatch(ActionCreator.getActiveCard(activeCardId));
+  },
+  outActiveCard() {
+    dispatch(ActionCreator.leaveActiveCard());
+  }
+});
+
+export {PlacesList};
+export default connect(mapStateToProps, mapDispatchToProps)(PlacesList);
