@@ -1,5 +1,3 @@
-import {connect} from "react-redux";
-import {ActionCreator} from "@store/action";
 import MainPlaceCard from "@components/main-place-card/main-place-card";
 import FavoritePlaceCard from "@components/favorite-place-card/favorite-place-card";
 import NearPlaceCard from "@components/near-place-card/near-place-card";
@@ -67,23 +65,8 @@ PlacesList.propTypes = {
   offersForCity: offersPropType.isRequired,
   type: PropTypes.string.isRequired,
   currentSort: PropTypes.string.isRequired,
-  onActiveCard: PropTypes.func.isRequired,
-  outActiveCard: PropTypes.func.isRequired,
+  onActiveCard: PropTypes.func,
+  outActiveCard: PropTypes.func,
 };
 
-const mapStateToProps = (state) => ({
-  offersForCity: state.offersForCity,
-  currentSort: state.currentSort,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onActiveCard(activeCardId) {
-    dispatch(ActionCreator.getActiveCard(activeCardId));
-  },
-  outActiveCard() {
-    dispatch(ActionCreator.leaveActiveCard());
-  }
-});
-
-export {PlacesList};
-export default connect(mapStateToProps, mapDispatchToProps)(PlacesList);
+export default PlacesList;

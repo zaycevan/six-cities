@@ -42,7 +42,8 @@ module.exports = {
       '@src': path.resolve(__dirname, 'src/'),
       '@components': path.resolve(__dirname, 'src/components/'),
       '@store': path.resolve(__dirname, 'src/store'),
-      '@utils': path.resolve(__dirname, 'src/utils/')
+      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@hocs': path.resolve(__dirname, 'src/hocs/')
     },
     extensions: ['.js', '.jsx']
   },

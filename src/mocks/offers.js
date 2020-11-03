@@ -36,6 +36,7 @@ export default [
       name: `Philip`,
       super: true
     },
+    isFavorite: Boolean(getRandomInteger(0, 1)),
     reviewsId: generateReviewsId()
   },
   {
@@ -58,6 +59,7 @@ export default [
       name: `Harm`,
       super: false
     },
+    isFavorite: Boolean(getRandomInteger(0, 1)),
     reviewsId: generateReviewsId()
   },
   {
@@ -79,6 +81,7 @@ export default [
       name: `Erwin`,
       super: false
     },
+    isFavorite: Boolean(getRandomInteger(0, 1)),
     reviewsId: generateReviewsId()
   },
   {
@@ -100,6 +103,7 @@ export default [
       name: `Dario`,
       super: true
     },
+    isFavorite: Boolean(getRandomInteger(0, 1)),
     reviewsId: generateReviewsId()
   }
 ];

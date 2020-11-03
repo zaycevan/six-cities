@@ -1,4 +1,3 @@
-import {connect} from "react-redux";
 import {offersPropType} from "@utils/prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -77,10 +76,4 @@ Map.propTypes = {
   mapClassName: PropTypes.string.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  offersForCity: state.offersForCity,
-  activeCardId: state.activeCardId,
-});
-
-export {Map};
-export default connect(mapStateToProps)(Map);
+export default Map;

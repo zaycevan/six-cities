@@ -9,6 +9,7 @@ export const PageType = {
   MAIN: `Main`,
   FAVORITE: `Favorite`,
   NEAR: `Near`,
+  LOGIN: `Login`,
 };
 
 export const SortType = {

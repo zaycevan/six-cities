@@ -2,8 +2,19 @@ import {Link} from "react-router-dom";
 import {offerPropType} from "@utils/prop-types";
 
 const PlaceCard = (props) => {
-  const {offer, onActiveCard, outActiveCard, placeCardClassName, imageWrapperClassName, infoClassName, imageWidth, imageHeight, showPremium} = props;
-  const {id, isPremium, photos, price, rating, title, type} = offer;
+  const {
+    offer,
+    onActiveCard,
+    outActiveCard,
+    placeCardClassName,
+    imageWrapperClassName,
+    infoClassName,
+    imageWidth,
+    imageHeight,
+    showPremium
+  } = props;
+
+  const {id, isPremium, photos, price, rating, title, isFavorite, type} = offer;
   const isOnCard = () => {
     if (onActiveCard) {
       return onActiveCard(id);
@@ -20,11 +31,11 @@ const PlaceCard = (props) => {
   return (
     <article className={`${placeCardClassName} place-card`}
       id={id}
-      onMouseOver = {(evt) => {
+      onMouseEnter = {(evt) => {
         evt.preventDefault();
         isOnCard();
       }}
-      onMouseOut = {(evt) => {
+      onMouseLeave = {(evt) => {
         evt.preventDefault();
         isOutCard();
       }}>
@@ -47,7 +58,7 @@ const PlaceCard = (props) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button button" type="button">
+          <button className={`place-card__bookmark-button button ${isFavorite ? `place-card__bookmark-button--active` : ``}`} type="button">
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

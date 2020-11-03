@@ -1,1 +1,1 @@
-export default [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Moscow`];
+export default [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
