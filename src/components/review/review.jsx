@@ -3,7 +3,14 @@ import {reviewPropType} from "@utils/prop-types";
 
 const Review = (props) => {
   const {offerReview} = props;
-  const {id, avatar, name, rating, date, text} = offerReview;
+  const {
+    id,
+    avatar,
+    name,
+    rating,
+    date,
+    text
+  } = offerReview;
 
   return (
     <li className="reviews__item" id={id}>

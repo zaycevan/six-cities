@@ -3,31 +3,27 @@ import MainScreen from "@components/main-screen/main-screen";
 import SignInScreen from "@components/sign-in-screen/sign-in-screen";
 import FavoritesScreen from "@components/favorites-screen/favorites-screen";
 import RoomScreen from "@components/room-screen/room-screen";
-import {offersPropType, reviewsPropType} from "@utils/prop-types";
+import withActiveCard from "@hocs/with-active-card/with-active-card";
 
-const App = (props) => {
-  const {offers, reviews} = props;
+const MainScreenWrapped = withActiveCard(MainScreen);
+const RoomScreenWrapped = withActiveCard(RoomScreen);
+
+const App = () => {
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreen />
+          <MainScreenWrapped />
         </Route>
         <Route exact path="/login">
           <SignInScreen />
         </Route>
         <Route exact path="/favorites">
-          <FavoritesScreen
-            offers={offers}
-          />
+          <FavoritesScreen />
         </Route>
         <Route exact path="/offer/:id">
-          <RoomScreen
-            offer={offers[0]}
-            nearOffers={offers.slice(0, 3)}
-            reviews={reviews}
-          />
+          <RoomScreenWrapped />
         </Route>
       </Switch>
     </BrowserRouter>
@@ -35,8 +31,7 @@ const App = (props) => {
 };
 
 App.propTypes = {
-  offers: offersPropType.isRequired,
-  reviews: reviewsPropType.isRequired,
+
 };
 
 export default App;

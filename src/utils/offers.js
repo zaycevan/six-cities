@@ -1,9 +1,5 @@
 import {SortType} from "@src/const";
 
-export const getOffersForCity = (city, offers) => {
-  return offers.filter((offer) => offer.city === city);
-};
-
 const compareTitles = (titleA, titleB) => {
   if (titleA > titleB) {
     return 1;

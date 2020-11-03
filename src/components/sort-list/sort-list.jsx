@@ -30,7 +30,6 @@ SortList.propTypes = {
 
 const mapStateToProps = (state) => ({
   currentSort: state.currentSort,
-  sortOpen: state.sortOpen,
 });
 
 const mapDispatchToProps = (dispatch) => ({

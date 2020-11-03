@@ -42,7 +42,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCity(city) {
     dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.gettingOffers(city));
+    dispatch(ActionCreator.resetSort());
   },
 });
 
