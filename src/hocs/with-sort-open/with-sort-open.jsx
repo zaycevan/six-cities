@@ -46,9 +46,6 @@ const withSortOpen = (Component) => {
     }
   }
 
-  WithSortOpen.propTypes = {
-  };
-
   return WithSortOpen;
 };
 

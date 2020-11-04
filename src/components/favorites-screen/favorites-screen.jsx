@@ -4,6 +4,7 @@ import Header from "@components/header/header";
 import FavoritesList from "@components/favorites-list/favorites-list";
 import {offersPropType} from "@utils/prop-types";
 import {PageType} from "@src/const";
+import {mapStateToProps} from "./favorites-screen-connect";
 
 const FavoritesScreen = (props) => {
   const {cities, offers} = props;
@@ -38,11 +39,6 @@ FavoritesScreen.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   offers: offersPropType.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  cities: state.cities,
-  offers: state.offers,
-});
 
 export {FavoritesScreen};
 export default connect(mapStateToProps)(FavoritesScreen);

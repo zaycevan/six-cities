@@ -7,7 +7,8 @@ import PlacesList from "@components/places-list/places-list";
 import {getPluralWord} from "@utils/common";
 import {offersPropType, reviewsPropType} from "@utils/prop-types";
 import {PageType, SortType} from "@src/const";
-import {filteredNearOffersSelector, filteredOfferReviews} from "@store/selectors";
+import {filteredOfferReviews} from "@store/selectors";
+import {mapStateToProps} from "./room-screen-connect";
 
 const RoomScreen = (props) => {
   const {
@@ -161,11 +162,6 @@ RoomScreen.propTypes = {
   onActiveCard: PropTypes.func.isRequired,
   outActiveCard: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  nearOffers: filteredNearOffersSelector(state),
-  reviews: state.reviews,
-});
 
 export {RoomScreen};
 export default connect(mapStateToProps)(RoomScreen);

@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {ActionCreator} from "@store/action";
+import {mapStateToProps, mapDispatchToProps} from "./cities-list-connect";
 
 const CitiesList = (props) => {
   const {
@@ -33,18 +33,6 @@ CitiesList.propTypes = {
   currentCity: PropTypes.string.isRequired,
   onCity: PropTypes.func.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  cities: state.cities,
-  currentCity: state.currentCity,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onCity(city) {
-    dispatch(ActionCreator.changeCity(city));
-    dispatch(ActionCreator.resetSort());
-  },
-});
 
 export {CitiesList};
 export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);
