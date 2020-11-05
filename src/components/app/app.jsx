@@ -5,7 +5,6 @@ import FavoritesScreen from "@components/favorites-screen/favorites-screen";
 import RoomScreen from "@components/room-screen/room-screen";
 import withActiveCard from "@hocs/with-active-card/with-active-card";
 
-const MainScreenWrapped = withActiveCard(MainScreen);
 const RoomScreenWrapped = withActiveCard(RoomScreen);
 
 const App = () => {
@@ -14,7 +13,7 @@ const App = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/">
-          <MainScreenWrapped />
+          <MainScreen />
         </Route>
         <Route exact path="/login">
           <SignInScreen />
@@ -28,10 +27,6 @@ const App = () => {
       </Switch>
     </BrowserRouter>
   );
-};
-
-App.propTypes = {
-
 };
 
 export default App;

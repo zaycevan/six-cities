@@ -1,5 +1,6 @@
 import {connect} from "react-redux";
 import SortList from "@components/sort-list/sort-list";
+import {mapStateToProps} from "./sort-form-connect";
 
 const SortForm = (props) => {
   const {
@@ -30,10 +31,6 @@ SortForm.propTypes = {
   onOpenSort: PropTypes.func.isRequired,
   currentSort: PropTypes.string.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  currentSort: state.currentSort,
-});
 
 export {SortForm};
 export default connect(mapStateToProps)(SortForm);

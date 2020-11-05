@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {ActionCreator} from "@store/action";
 import {SortType} from "@src/const";
+import {mapStateToProps, mapDispatchToProps} from "./sort-list-connect";
 
 const SortList = (props) => {
   const {currentSort, onSort, sortOpen} = props;
@@ -27,16 +27,6 @@ SortList.propTypes = {
   onSort: PropTypes.func.isRequired,
   sortOpen: PropTypes.bool.isRequired,
 };
-
-const mapStateToProps = (state) => ({
-  currentSort: state.currentSort,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onSort(sortType) {
-    dispatch(ActionCreator.changeSort(sortType));
-  }
-});
 
 export {SortList};
 export default connect(mapStateToProps, mapDispatchToProps)(SortList);
