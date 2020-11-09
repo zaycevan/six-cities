@@ -1,7 +1,15 @@
 import {createSelector} from "reselect";
 
-const getCurrentCity = (state) => (state.currentCity);
-const getOffers = (state) => (state.offers);
+export const getCurrentSort = (state) => (state.SORT.currentSort);
+
+export const getReviews = (state) => (state.REVIEWS.reviews);
+
+export const getCities = (state) => (state.CITIES.cities);
+
+export const getCurrentCity = (state) => (state.CITIES.currentCity);
+
+export const getOffers = (state) => (state.OFFERS.offers);
+
 const filteredCityOffers = (city, offers) => {
   return offers.filter((offer) => offer.city === city);
 };
@@ -21,7 +29,3 @@ export const filteredNearOffersSelector = createSelector(
     getOffers,
     (offers) => (filteredNearOffers(offers))
 );
-
-export const filteredOfferReviews = (reviews, reviewsId) => {
-  return reviews.filter((review) => reviewsId.includes(review.id));
-};

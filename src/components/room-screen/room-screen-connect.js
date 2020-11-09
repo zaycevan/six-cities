@@ -1,6 +1,6 @@
-import {filteredNearOffersSelector} from "@store/selectors";
+import {filteredNearOffersSelector, getReviews} from "@store/selectors";
 
 export const mapStateToProps = (state) => ({
   nearOffers: filteredNearOffersSelector(state),
-  reviews: state.reviews,
+  reviews: getReviews(state),
 });

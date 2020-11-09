@@ -14,7 +14,7 @@ const PlaceCard = (props) => {
     showPremium
   } = props;
 
-  const {id, isPremium, photos, price, rating, title, isFavorite, type} = offer;
+  const {id, isPremium, previewPhotos, price, rating, title, isFavorite, type} = offer;
   const isOnCard = () => {
     if (onActiveCard) {
       return onActiveCard(id);
@@ -49,7 +49,7 @@ const PlaceCard = (props) => {
       }
       <div className={`${imageWrapperClassName} place-card__image-wrapper`}>
         <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={photos[0]} width={`${imageWidth}`} height={`${imageHeight}`} alt="Place image"/>
+          <img className="place-card__image" src={previewPhotos} width={`${imageWidth}`} height={`${imageHeight}`} alt="Place image"/>
         </Link>
       </div>
       <div className={`${infoClassName} place-card__info`}>

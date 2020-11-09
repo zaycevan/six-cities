@@ -18,3 +18,10 @@ export const SortType = {
   PRICE_DOWN: `Price: high to low`,
   TOP_RATED: `Top rated first`
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];

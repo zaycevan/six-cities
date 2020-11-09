@@ -50,3 +50,30 @@ export const getSortedOffers = (currentSort, offers) => {
   }
   return offers;
 };
+
+export const adaptOfferToClient = (offer) => {
+  return {
+    id: offer.id,
+    city: offer.city.name,
+    cityLocation: [offer.city.location.latitude, offer.city.location.longitude],
+    previewPhotos: offer.preview_image,
+    photos: offer.images,
+    title: offer.title,
+    description: offer.description,
+    isPremium: offer.is_premium,
+    type: offer.type,
+    rating: offer.rating,
+    bedroomsCount: offer.bedrooms,
+    maxGuestsCount: offer.max_adults,
+    price: offer.price,
+    amenities: offer.goods,
+    coordinates: [offer.location.latitude, offer.location.longitude],
+    hostInformation: {
+      id: offer.host.id,
+      avatar: offer.host.avatar_url,
+      name: offer.host.name,
+      super: offer.host.is_pro
+    },
+    isFavorite: offer.is_favorite,
+  };
+};

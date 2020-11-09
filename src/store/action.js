@@ -1,24 +1,24 @@
 export const ActionType = {
+  LOAD_OFFERS: `LOAD_OFFERS`,
+  LOAD_REVIEWS: `LOAD_REVIEWS`,
   CHANGE_CITY: `CITY_CHANGE`,
-  GETTING_OFFERS: `GETTING_OFFERS`,
-  OPEN_SORT: `OPEN_SORT`,
   CHANGE_SORT: `CHANGE_SORT`,
   RESET_SORT: `RESET_SORT`,
-  GET_ACTIVE_CARD: `GET_ACTIVE_CARD`,
-  LEAVE_ACTIVE_CARD: `LEAVE_ACTIVE_CARD`
+  REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
 };
 
 export const ActionCreator = {
+  loadOffers: (offers) => ({
+    type: ActionType.LOAD_OFFERS,
+    payload: offers,
+  }),
+  loadReviews: (reviews) => ({
+    type: ActionType.LOAD_REVIEWS,
+    payload: reviews,
+  }),
   changeCity: (city) => ({
     type: ActionType.CHANGE_CITY,
     payload: city,
-  }),
-  // gettingOffers: (city) => ({
-  //   type: ActionType.GETTING_OFFERS,
-  //   payload: city,
-  // }),
-  openSort: () => ({
-    type: ActionType.OPEN_SORT,
   }),
   changeSort: (sortType) => ({
     type: ActionType.CHANGE_SORT,
@@ -27,11 +27,9 @@ export const ActionCreator = {
   resetSort: () => ({
     type: ActionType.RESET_SORT,
   }),
-  getActiveCard: (activeCardId) => ({
-    type: ActionType.GET_ACTIVE_CARD,
-    payload: activeCardId,
-  }),
-  leaveActiveCard: () => ({
-    type: ActionType.LEAVE_ACTIVE_CARD,
+  requireAuthorization: (status) => ({
+    type: ActionType.REQUIRED_AUTHORIZATION,
+    payload: status,
   }),
 };
+

@@ -2,7 +2,7 @@ import {formatReviewDate} from "@utils/common";
 import {reviewPropType} from "@utils/prop-types";
 
 const Review = (props) => {
-  const {offerReview} = props;
+  const {review} = props;
   const {
     id,
     avatar,
@@ -10,7 +10,7 @@ const Review = (props) => {
     rating,
     date,
     text
-  } = offerReview;
+  } = review;
 
   return (
     <li className="reviews__item" id={id}>
@@ -37,7 +37,7 @@ const Review = (props) => {
 };
 
 Review.propTypes = {
-  offerReview: reviewPropType.isRequired,
+  review: reviewPropType.isRequired,
 };
 
 export default Review;
