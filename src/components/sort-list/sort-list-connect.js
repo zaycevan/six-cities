@@ -1,7 +1,8 @@
 import {ActionCreator} from "@store/action";
+import {getCurrentSort} from "@store/selectors";
 
 export const mapStateToProps = (state) => ({
-  currentSort: state.currentSort,
+  currentSort: getCurrentSort(state),
 });
 
 export const mapDispatchToProps = (dispatch) => ({

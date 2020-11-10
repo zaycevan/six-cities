@@ -2,14 +2,14 @@ import {reviewsPropType} from "@utils/prop-types";
 import Review from "@components/review/review";
 
 const ReviewsList = (props) => {
-  const {offerReviews} = props;
+  const {reviews} = props;
 
   return (
     <ul className="reviews__list">
-      {offerReviews.map((offerReview) => (
+      {reviews.map((review) => (
         <Review
-          key={offerReview.id}
-          offerReview={offerReview}
+          key={review.id}
+          review={review}
         />
       ))}
     </ul>
@@ -17,7 +17,7 @@ const ReviewsList = (props) => {
 };
 
 ReviewsList.propTypes = {
-  offerReviews: reviewsPropType.isRequired,
+  reviews: reviewsPropType.isRequired,
 };
 
 export default ReviewsList;

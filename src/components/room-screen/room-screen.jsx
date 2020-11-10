@@ -7,7 +7,6 @@ import PlacesList from "@components/places-list/places-list";
 import {getPluralWord} from "@utils/common";
 import {offersPropType, reviewsPropType} from "@utils/prop-types";
 import {PageType, SortType} from "@src/const";
-import {filteredOfferReviews} from "@store/selectors";
 import {mapStateToProps} from "./room-screen-connect";
 
 const RoomScreen = (props) => {
@@ -32,10 +31,8 @@ const RoomScreen = (props) => {
     price,
     amenities,
     hostInformation,
-    reviewsId
   } = nearOffers[0];
 
-  const offerReviews = filteredOfferReviews(reviews, reviewsId);
   const PHOTO_COUNTS = 6;
 
   return (
@@ -122,9 +119,9 @@ const RoomScreen = (props) => {
                 </div>
               </div>
               <section className="property__reviews reviews">
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span></h2>
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
                 <ReviewsList
-                  offerReviews={offerReviews}
+                  reviews={reviews}
                 />
                 <ReviewFrom />
               </section>

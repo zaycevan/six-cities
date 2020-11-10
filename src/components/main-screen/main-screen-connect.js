@@ -1,6 +1,6 @@
-import {filteredCityOffersSelector} from "@store/selectors";
+import {getCurrentCity, filteredCityOffersSelector} from "@store/selectors";
 
 export const mapStateToProps = (state) => ({
-  currentCity: state.currentCity,
+  currentCity: getCurrentCity(state),
   offersForCity: filteredCityOffersSelector(state),
 });

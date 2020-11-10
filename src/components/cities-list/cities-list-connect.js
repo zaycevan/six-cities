@@ -1,8 +1,9 @@
 import {ActionCreator} from "@store/action";
+import {getCities, getCurrentCity} from "@store/selectors";
 
 export const mapStateToProps = (state) => ({
-  cities: state.cities,
-  currentCity: state.currentCity,
+  cities: getCities(state),
+  currentCity: getCurrentCity(state),
 });
 
 export const mapDispatchToProps = (dispatch) => ({

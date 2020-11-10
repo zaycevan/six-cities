@@ -18,3 +18,24 @@ export const SortType = {
   PRICE_DOWN: `Price: high to low`,
   TOP_RATED: `Top rated first`
 };
+
+export const AuthorizationStatus = {
+  AUTH: `AUTH`,
+  NO_AUTH: `NO_AUTH`,
+};
+
+export const CITIES = [`Paris`, `Cologne`, `Brussels`, `Amsterdam`, `Hamburg`, `Dusseldorf`];
+
+export const AppRoute = {
+  LOGIN: `/login`,
+  FAVORITES: `/favorites`,
+  ROOT: `/`,
+  OFFER: `/offer/:id`,
+};
+
+export const APIRoute = {
+  HOTELS: `/hotels`,
+  FAVORITES: `/favorites`,
+  COMMENTS: `/comments/`,
+  LOGIN: `/login`,
+};

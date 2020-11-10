@@ -1,4 +1,6 @@
+import {getCities, getOffers} from "@store/selectors";
+
 export const mapStateToProps = (state) => ({
-  cities: state.cities,
-  offers: state.offers,
+  cities: getCities(state),
+  offers: getOffers(state),
 });

@@ -1,4 +1,5 @@
 import {Link} from "react-router-dom";
+import {AppRoute} from "@src/const";
 import {offerPropType} from "@utils/prop-types";
 
 const PlaceCard = (props) => {
@@ -14,7 +15,7 @@ const PlaceCard = (props) => {
     showPremium
   } = props;
 
-  const {id, isPremium, photos, price, rating, title, isFavorite, type} = offer;
+  const {id, isPremium, previewPhotos, price, rating, title, isFavorite, type} = offer;
   const isOnCard = () => {
     if (onActiveCard) {
       return onActiveCard(id);
@@ -48,8 +49,8 @@ const PlaceCard = (props) => {
         </div>
       }
       <div className={`${imageWrapperClassName} place-card__image-wrapper`}>
-        <Link to={`/offer/${id}`}>
-          <img className="place-card__image" src={photos[0]} width={`${imageWidth}`} height={`${imageHeight}`} alt="Place image"/>
+        <Link to={AppRoute.OFFER + id}>
+          <img className="place-card__image" src={previewPhotos} width={`${imageWidth}`} height={`${imageHeight}`} alt="Place image"/>
         </Link>
       </div>
       <div className={`${infoClassName} place-card__info`}>
@@ -72,7 +73,7 @@ const PlaceCard = (props) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${id}`}>
+          <Link to={AppRoute.OFFER + id}>
             {title}
           </Link>
         </h2>
