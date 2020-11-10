@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import Header from "@components/header/header";
-import {PageType} from "@src/const";
+import {PageType, AppRoute} from "@src/const";
 import {mapStateToProps, mapDispatchToProps} from "./sign-in-screen-connect";
 
 class SignInScreen extends React.PureComponent {
@@ -72,7 +72,7 @@ class SignInScreen extends React.PureComponent {
             </section>
             <section className="locations locations--login locations--current">
               <div className="locations__item">
-                <Link to={`/`} className="locations__item-link">
+                <Link to={AppRoute.ROOT} className="locations__item-link">
                   <span>{currentCity}</span>
                 </Link>
               </div>

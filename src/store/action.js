@@ -5,6 +5,7 @@ export const ActionType = {
   CHANGE_SORT: `CHANGE_SORT`,
   RESET_SORT: `RESET_SORT`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
+  REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
 };
 
 export const ActionCreator = {
@@ -31,5 +32,8 @@ export const ActionCreator = {
     type: ActionType.REQUIRED_AUTHORIZATION,
     payload: status,
   }),
+  redirectToRoute: (url) => ({
+    type: ActionType.REDIRECT_TO_ROUTE,
+    payload: url,
+  }),
 };
-

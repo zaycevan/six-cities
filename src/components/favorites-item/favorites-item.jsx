@@ -1,7 +1,7 @@
 import {Link} from "react-router-dom";
 import PlacesList from "@components/places-list/places-list";
 import {offersPropType} from "@utils/prop-types";
-import {PageType, SortType} from "@src/const";
+import {PageType, SortType, AppRoute} from "@src/const";
 
 const FavoritesItem = (props) => {
   const {
@@ -17,7 +17,7 @@ const FavoritesItem = (props) => {
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
         <div className="locations__item">
-          <Link to={`/`} className="locations__item-link">
+          <Link to={AppRoute.ROOT} className="locations__item-link">
             <span>{city}</span>
           </Link>
         </div>

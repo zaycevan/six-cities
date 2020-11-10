@@ -29,3 +29,7 @@ export const filteredNearOffersSelector = createSelector(
     getOffers,
     (offers) => (filteredNearOffers(offers))
 );
+
+export const getAuthorizationStatus = (state) => {
+  return (state.USER.authorizationStatus);
+};
