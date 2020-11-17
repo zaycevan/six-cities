@@ -21,7 +21,7 @@ const withSortOpen = (Component) => {
       document.removeEventListener(`click`, this._handleClickOutside, false);
     }
 
-    componentWillMount() {
+    componentDidMount() {
       document.addEventListener(`click`, this._handleClickOutside, false);
     }
 

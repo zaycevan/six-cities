@@ -15,7 +15,10 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then((response) => {
+      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+      dispatch(ActionCreator.setUser(response.data.email));
+    })
     .catch((err) => {
       throw err;
     })

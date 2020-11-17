@@ -30,7 +30,7 @@ const App = () => {
             );
           }}
         />
-        <Route exact path={AppRoute.OFFER}>
+        <Route exact path={AppRoute.OFFER + `:id`}>
           <RoomScreenWrapped />
         </Route>
       </Switch>

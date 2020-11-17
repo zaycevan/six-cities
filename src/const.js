@@ -30,7 +30,7 @@ export const AppRoute = {
   LOGIN: `/login`,
   FAVORITES: `/favorites`,
   ROOT: `/`,
-  OFFER: `/offer/:id`,
+  OFFER: `/offer/`,
 };
 
 export const APIRoute = {
