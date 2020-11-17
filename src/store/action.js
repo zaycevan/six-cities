@@ -4,6 +4,7 @@ export const ActionType = {
   CHANGE_CITY: `CITY_CHANGE`,
   CHANGE_SORT: `CHANGE_SORT`,
   RESET_SORT: `RESET_SORT`,
+  SET_USER: `SET_USER`,
   REQUIRED_AUTHORIZATION: `REQUIRED_AUTHORIZATION`,
   REDIRECT_TO_ROUTE: `REDIRECT_TO_ROUTE`
 };
@@ -27,6 +28,10 @@ export const ActionCreator = {
   }),
   resetSort: () => ({
     type: ActionType.RESET_SORT,
+  }),
+  setUser: (user) => ({
+    type: ActionType.SET_USER,
+    payload: user,
   }),
   requireAuthorization: (status) => ({
     type: ActionType.REQUIRED_AUTHORIZATION,
