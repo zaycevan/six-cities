@@ -4,6 +4,7 @@ import {offersData} from "./offers-data/offers-data";
 import {reviewsData} from "./reviews-data/reviews-data";
 import {sortType} from "./sort-type/sort-type";
 import {user} from "./user/user";
+import {appReady} from "./app-ready/app-ready";
 
 export const NameSpace = {
   CITIES: `CITIES`,
@@ -11,6 +12,7 @@ export const NameSpace = {
   REVIEWS: `REVIEWS`,
   SORT: `SORT`,
   USER: `USER`,
+  APP: `APP`,
 };
 
 export default combineReducers({
@@ -19,4 +21,5 @@ export default combineReducers({
   [NameSpace.REVIEWS]: reviewsData,
   [NameSpace.SORT]: sortType,
   [NameSpace.USER]: user,
+  [NameSpace.APP]: appReady,
 });

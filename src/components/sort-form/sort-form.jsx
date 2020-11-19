@@ -1,6 +1,4 @@
-import {connect} from "react-redux";
-import SortList from "@components/sort-list/sort-list";
-import {mapStateToProps} from "./sort-form-connect";
+import SortList from "@components/sort-list/sort-list-connect";
 
 const SortForm = (props) => {
   const {
@@ -33,4 +31,3 @@ SortForm.propTypes = {
 };
 
 export {SortForm};
-export default connect(mapStateToProps)(SortForm);

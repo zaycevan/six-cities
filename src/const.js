@@ -36,6 +36,22 @@ export const AppRoute = {
 export const APIRoute = {
   HOTELS: `/hotels`,
   FAVORITES: `/favorites`,
-  COMMENTS: `/comments/`,
+  COMMENTS: `/comments`,
   LOGIN: `/login`,
+};
+
+export const CommentLength = {
+  MAX: 300,
+  MIN: 50,
+};
+
+export const ratingValue = [5, 4, 3, 2, 1];
+
+export const ratingTitle = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
+
+export const ReviewStatus = {
+  BEFORE_SENT: `BEFORE_SENT`,
+  PENDING: `PENDING`,
+  SENT: `SENT`,
+  FAILURE: `FAILURE`,
 };

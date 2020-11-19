@@ -1,6 +1,4 @@
-import {connect} from "react-redux";
 import {SortType} from "@src/const";
-import {mapStateToProps, mapDispatchToProps} from "./sort-list-connect";
 
 const SortList = (props) => {
   const {currentSort, onSort, sortOpen} = props;
@@ -29,4 +27,3 @@ SortList.propTypes = {
 };
 
 export {SortList};
-export default connect(mapStateToProps, mapDispatchToProps)(SortList);

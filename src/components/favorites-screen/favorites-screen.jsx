@@ -1,10 +1,8 @@
-import {connect} from "react-redux";
 import {Link} from "react-router-dom";
-import Header from "@components/header/header";
+import Header from "@components/header/header-connect";
 import FavoritesList from "@components/favorites-list/favorites-list";
 import {offersPropType} from "@utils/prop-types";
 import {PageType, AppRoute} from "@src/const";
-import {mapStateToProps} from "./favorites-screen-connect";
 
 const FavoritesScreen = (props) => {
   const {cities, offers} = props;
@@ -41,4 +39,4 @@ FavoritesScreen.propTypes = {
 };
 
 export {FavoritesScreen};
-export default connect(mapStateToProps)(FavoritesScreen);
+

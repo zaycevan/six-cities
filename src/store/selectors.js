@@ -1,14 +1,17 @@
 import {createSelector} from "reselect";
+import {NameSpace} from "@store/reducers/root-reducer";
 
-export const getCurrentSort = (state) => (state.SORT.currentSort);
+export const getCurrentSort = (state) => (state[NameSpace.SORT].currentSort);
 
-export const getReviews = (state) => (state.REVIEWS.reviews);
+export const getReviews = (state) => (state[NameSpace.REVIEWS].reviews);
 
-export const getCities = (state) => (state.CITIES.cities);
+export const getReviewStatus = (state) => (state[NameSpace.REVIEWS].reviewStatus);
 
-export const getCurrentCity = (state) => (state.CITIES.currentCity);
+export const getCities = (state) => (state[NameSpace.CITIES].cities);
 
-export const getOffers = (state) => (state.OFFERS.offers);
+export const getCurrentCity = (state) => (state[NameSpace.CITIES].currentCity);
+
+export const getOffers = (state) => (state[NameSpace.OFFERS].offers);
 
 const filteredCityOffers = (city, offers) => {
   return offers.filter((offer) => offer.city === city);
@@ -22,19 +25,17 @@ export const filteredFavoriteOffers = (city, offers) => {
   return filteredCityOffers(city, offers).filter((offer) => offer.isFavorite === true);
 };
 
-const filteredNearOffers = (offers) => {
-  return offers.slice(0, 3);
-};
-export const filteredNearOffersSelector = createSelector(
-    getOffers,
-    (offers) => (filteredNearOffers(offers))
-);
+export const getNearOffers = (state) => (state[NameSpace.OFFERS].nearOffers);
 
 export const getAuthorizationStatus = (state) => {
-  return (state.USER.authorizationStatus);
+  return (state[NameSpace.USER].authorizationStatus);
 };
 
 export const getUser = (state) => {
-  return (state.USER.user);
+  return (state[NameSpace.USER].user);
+};
+
+export const getAppStatus = (state) => {
+  return (state[NameSpace.APP].isAppReady);
 };
 

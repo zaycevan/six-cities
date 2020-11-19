@@ -1,11 +1,9 @@
-import {connect} from "react-redux";
-import SortForm from "@components/sort-form/sort-form";
+import SortForm from "@components/sort-form/sort-form-connect";
 import withSortOpen from "@hocs/with-sort-open/with-sort-open";
 import PlacesList from "@components/places-list/places-list";
 import Map from "@components/map/map";
 import {offersPropType} from "@utils/prop-types";
 import {PageType} from "@src/const";
-import {mapStateToProps} from "./main-screen-with-offers-connect";
 
 const SortFormWrapped = withSortOpen(SortForm);
 
@@ -55,5 +53,3 @@ MainScreenWithOffers.propTypes = {
 };
 
 export {MainScreenWithOffers};
-export default connect(mapStateToProps)(MainScreenWithOffers);
-

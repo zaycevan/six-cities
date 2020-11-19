@@ -1,6 +1,3 @@
-import {connect} from "react-redux";
-import {mapStateToProps, mapDispatchToProps} from "./cities-list-connect";
-
 const CitiesList = (props) => {
   const {
     cities,
@@ -35,4 +32,3 @@ CitiesList.propTypes = {
 };
 
 export {CitiesList};
-export default connect(mapStateToProps, mapDispatchToProps)(CitiesList);

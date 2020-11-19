@@ -1,7 +1,5 @@
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
 import {PageType, AppRoute} from "@src/const";
-import {mapStateToProps} from "./header-connect";
 
 const Header = (props) => {
   const {type, user} = props;
@@ -41,4 +39,3 @@ Header.propTypes = {
 };
 
 export {Header};
-export default connect(mapStateToProps)(Header);

@@ -1,12 +1,10 @@
-import {connect} from "react-redux";
-import Header from "@components/header/header";
-import CitiesList from "@components/cities-list/cities-list";
+import Header from "@components/header/header-connect";
+import CitiesList from "@components/cities-list/cities-list-connect";
 import MainScreenNoOffers from "@components/main-screen-no-offers/main-screen-no-offers";
-import MainScreenWithOffers from "@components/main-screen-with-offers/main-screen-with-offers";
+import MainScreenWithOffers from "@components/main-screen-with-offers/main-screen-with-offers-connect";
 import withActiveCard from "@hocs/with-active-card/with-active-card";
 import {offersPropType} from "@utils/prop-types";
 import {PageType} from "@src/const";
-import {mapStateToProps} from "./main-screen-connect";
 
 const MainScreenWithOffersWrapped = withActiveCard(MainScreenWithOffers);
 
@@ -46,4 +44,3 @@ MainScreen.propTypes = {
 };
 
 export {MainScreen};
-export default connect(mapStateToProps)(MainScreen);
