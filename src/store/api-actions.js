@@ -1,5 +1,5 @@
 import {ActionCreator} from "./action";
-import {AuthorizationStatus, APIRoute, AppRoute, ReviewStatus} from "@src/const";
+import {AuthorizationStatus, APIRoute, AppRoute, PostStatus} from "@src/const";
 import {adaptOfferToClient} from "@utils/offers";
 import {adaptReviewToClient} from "@utils/reviews";
 
@@ -16,15 +16,15 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
 );
 
 export const postReview = (offerId, {comment, rating}) => (dispatch, _getState, api) => {
-  dispatch(ActionCreator.postReview(ReviewStatus.PENDING));
+  dispatch(ActionCreator.postReview(PostStatus.PENDING));
   api.post(`${APIRoute.COMMENTS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       dispatch(ActionCreator.loadReviews(data.map(adaptReviewToClient)));
-      dispatch(ActionCreator.postReview(ReviewStatus.SENT));
+      dispatch(ActionCreator.postReview(PostStatus.SENT));
     })
-    .then(() => dispatch(ActionCreator.postReview(ReviewStatus.BEFORE_SENT)))
+    .then(() => dispatch(ActionCreator.postReview(PostStatus.BEFORE_SENT)))
     .catch(() => {
-      dispatch(ActionCreator.postReview(ReviewStatus.FAILURE));
+      dispatch(ActionCreator.postReview(PostStatus.FAILURE));
     });
 };
 
@@ -34,6 +34,29 @@ export const fetchNearOffers = (offerId) => (dispatch, _getState, api) => (
       dispatch(ActionCreator.loadNearOffers(data.map(adaptOfferToClient)));
     })
 );
+
+export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
+  api.get(APIRoute.FAVORITE)
+    .then(({data}) => {
+      dispatch(ActionCreator.loadFavoriteOffers(data.map(adaptOfferToClient)));
+    })
+);
+
+export const postFavoriteOffer = (offerId, status) => (dispatch, _getState, api) => {
+  dispatch(ActionCreator.postFavoriteOffer(PostStatus.PENDING));
+  dispatch(ActionCreator.addFavoriteOfferId(offerId));
+  api.post(`${APIRoute.FAVORITE}/${offerId}/${status}`)
+    .then(() => {
+      dispatch(fetchFavoriteOffers());
+      dispatch(fetchOffers());
+      dispatch(fetchNearOffers(offerId));
+      dispatch(ActionCreator.postFavoriteOffer(PostStatus.SENT));
+    })
+    .then(() => dispatch(ActionCreator.postFavoriteOffer(PostStatus.BEFORE_SENT)))
+    .catch(() => {
+      dispatch(ActionCreator.postFavoriteOffer(PostStatus.FAILURE));
+    });
+};
 
 export const checkAuth = () => (dispatch, _getState, api) => (
   api.get(APIRoute.LOGIN)

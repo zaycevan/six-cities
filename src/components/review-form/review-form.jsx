@@ -1,6 +1,6 @@
 import {ratingValue, ratingTitle} from "@src/const";
 import ReviewStar from "./review-star";
-import {ReviewStatus} from "@src/const";
+import {PostStatus} from "@src/const";
 
 const ReviewFrom = (props) => {
   const {
@@ -14,7 +14,7 @@ const ReviewFrom = (props) => {
 
   return (
     <form className={`reviews__form form
-    ${reviewStatus === ReviewStatus.FAILURE ? `shake` : ``}`} action="#" method="post"
+    ${reviewStatus === PostStatus.FAILURE ? `shake` : ``}`} action="#" method="post"
     onSubmit={onSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">

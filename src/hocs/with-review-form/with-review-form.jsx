@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {postReview} from "@store/api-actions";
 import {getReviewStatus} from "@store/selectors";
 import {CommentLength} from "@src/const";
-import {ReviewStatus} from "@src/const";
+import {PostStatus} from "@src/const";
 
 const withReviewFrom = (Component) => {
   class WithReviewFrom extends React.PureComponent {
@@ -38,7 +38,7 @@ const withReviewFrom = (Component) => {
     _isFormDesabled() {
       const {reviewStatus} = this.props;
 
-      if (reviewStatus === ReviewStatus.PENDING) {
+      if (reviewStatus === PostStatus.PENDING) {
         return true;
       }
 
@@ -62,7 +62,7 @@ const withReviewFrom = (Component) => {
     componentDidUpdate() {
       const {reviewStatus} = this.props;
 
-      if (reviewStatus === ReviewStatus.SENT) {
+      if (reviewStatus === PostStatus.SENT) {
         this._resetForm();
       }
     }

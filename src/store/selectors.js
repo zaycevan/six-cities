@@ -13,7 +13,7 @@ export const getCurrentCity = (state) => (state[NameSpace.CITIES].currentCity);
 
 export const getOffers = (state) => (state[NameSpace.OFFERS].offers);
 
-const filteredCityOffers = (city, offers) => {
+export const filteredCityOffers = (city, offers) => {
   return offers.filter((offer) => offer.city === city);
 };
 export const filteredCityOffersSelector = createSelector(
@@ -21,9 +21,11 @@ export const filteredCityOffersSelector = createSelector(
     (currentCity, offers) => (filteredCityOffers(currentCity, offers))
 );
 
-export const filteredFavoriteOffers = (city, offers) => {
-  return filteredCityOffers(city, offers).filter((offer) => offer.isFavorite === true);
-};
+export const getFavoriteOffers = (state) => (state[NameSpace.OFFERS].favoriteOffers);
+
+export const getFavoriteOfferStatus = (state) => (state[NameSpace.OFFERS].favoriteOfferStatus);
+
+export const getFavoriteOfferId = (state) => (state[NameSpace.OFFERS].favoriteOfferId);
 
 export const getNearOffers = (state) => (state[NameSpace.OFFERS].nearOffers);
 

@@ -30,6 +30,28 @@ export const formatReviewDate = (date) => {
   return moment(date).format(`MMMM YYYY`);
 };
 
+const compareTitles = (titleA, titleB) => {
+  if (titleA > titleB) {
+    return 1;
+  } else if (titleA < titleB) {
+    return -1;
+  }
+  return 0;
+};
+
+export const sortReviewsByDate = (reviewA, reviewB) => {
+  let dateA = new Date(reviewA.date).getTime();
+  let dateB = new Date(reviewB.date).getTime();
+  let dataDiff = dateB - dateA;
+
+  if (dataDiff === 0) {
+    dataDiff = compareTitles(reviewA.text, reviewB.text);
+  }
+
+  return dataDiff;
+};
+
+
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
 };

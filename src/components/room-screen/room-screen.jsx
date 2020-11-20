@@ -1,3 +1,4 @@
+import browserHistory from "@src/browser-history";
 import Header from "@components/header/header-connect";
 import ReviewsList from "@components/reviews-list/reviews-list";
 import withReviewFrom from "@hocs/with-review-form/with-review-form";
@@ -6,11 +7,17 @@ import Map from "@components/map/map";
 import PlacesList from "@components/places-list/places-list";
 import {getPluralWord} from "@utils/common";
 import {offerPropType, offersPropType, reviewsPropType} from "@utils/prop-types";
-import {PageType, SortType, AuthorizationStatus} from "@src/const";
+import {PageType, SortType, AuthorizationStatus, AppRoute, PostStatus} from "@src/const";
 
 const ReviewFromWrapped = withReviewFrom(ReviewFrom);
 
 class RoomScreen extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this._handleFavoriteButtonClick = this._handleFavoriteButtonClick.bind(this);
+  }
+
   componentDidMount() {
     const {offer, loadReviews, loadNearOffers} = this.props;
 
@@ -18,11 +25,33 @@ class RoomScreen extends React.PureComponent {
     loadNearOffers(offer.id);
   }
 
+  _handleFavoriteButtonClick(evt) {
+    const {authorizationStatus, offer, onFavoriteButtonClick} = this.props;
+    const status = !offer.isFavorite ? 1 : 0;
+
+    evt.preventDefault();
+    if (authorizationStatus === AuthorizationStatus.NO_AUTH) {
+      browserHistory.push(AppRoute.LOGIN);
+    }
+    onFavoriteButtonClick(offer.id, status);
+  }
+
+  _isButtonDesabled() {
+    const {favoriteOfferStatus} = this.props;
+
+    if (favoriteOfferStatus === PostStatus.PENDING) {
+      return true;
+    }
+
+    return false;
+  }
+
   render() {
     const {
       offer,
       reviews,
       authorizationStatus,
+      favoriteOfferStatus,
       nearOffers,
       activeCardId,
       onActiveCard,
@@ -35,6 +64,7 @@ class RoomScreen extends React.PureComponent {
       title,
       description,
       isPremium,
+      isFavorite,
       type,
       rating,
       bedroomsCount,
@@ -74,7 +104,12 @@ class RoomScreen extends React.PureComponent {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  <button className="property__bookmark-button button" type="button">
+                  <button
+                    className={`property__bookmark-button button ${isFavorite ? `property__bookmark-button--active` : ``}
+                    ${favoriteOfferStatus === PostStatus.FAILURE ? `shake` : ``}`}
+                    type="button"
+                    onClick={this._handleFavoriteButtonClick}
+                    disabled={this._isButtonDesabled()}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -172,6 +207,8 @@ RoomScreen.propTypes = {
   offer: offerPropType.isRequired,
   reviews: reviewsPropType.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
+  onFavoriteButtonClick: PropTypes.func.isRequired,
+  favoriteOfferStatus: PropTypes.string.isRequired,
   nearOffers: offersPropType.isRequired,
   activeCardId: PropTypes.number,
   onActiveCard: PropTypes.func.isRequired,

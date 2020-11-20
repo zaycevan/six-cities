@@ -35,7 +35,7 @@ export const AppRoute = {
 
 export const APIRoute = {
   HOTELS: `/hotels`,
-  FAVORITES: `/favorites`,
+  FAVORITE: `/favorite`,
   COMMENTS: `/comments`,
   LOGIN: `/login`,
 };
@@ -49,7 +49,7 @@ export const ratingValue = [5, 4, 3, 2, 1];
 
 export const ratingTitle = [`perfect`, `good`, `not bad`, `badly`, `terribly`];
 
-export const ReviewStatus = {
+export const PostStatus = {
   BEFORE_SENT: `BEFORE_SENT`,
   PENDING: `PENDING`,
   SENT: `SENT`,

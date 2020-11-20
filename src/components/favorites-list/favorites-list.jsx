@@ -1,12 +1,11 @@
 import FavoritesItem from "@components/favorites-item/favorites-item";
 import {offersPropType} from "@utils/prop-types";
-import {filteredFavoriteOffers} from "@store/selectors";
-
+import {filteredCityOffers} from "@store/selectors";
 
 const FavoritesList = (props) => {
   const {
     cities,
-    offers
+    favoriteOffers
   } = props;
 
   return (
@@ -15,7 +14,7 @@ const FavoritesList = (props) => {
         <FavoritesItem
           key={`${city}-${i}`}
           city={city}
-          favoriteCityOffers={filteredFavoriteOffers(city, offers)}
+          favoriteCityOffers={filteredCityOffers(city, favoriteOffers)}
         />
       ))}
     </ul>
@@ -24,7 +23,7 @@ const FavoritesList = (props) => {
 
 FavoritesList.propTypes = {
   cities: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  offers: offersPropType.isRequired,
+  favoriteOffers: offersPropType.isRequired,
 };
 
 export default FavoritesList;

@@ -1,2 +1,2 @@
-GET https://5.react.pages.academy/six-cities/comments/26 HTTP/1.1
+POST https://5.react.pages.academy/six-cities/favorite/1/1 HTTP/1.1
 Content-Type: application/json

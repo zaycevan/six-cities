@@ -2,6 +2,9 @@ export const ActionType = {
   GET_READY_APP: `GET_READY_APP`,
   LOAD_OFFERS: `LOAD_OFFERS`,
   LOAD_NEAR_OFFERS: `LOAD_NEAR_OFFERS`,
+  LOAD_FAVORITE_OFFERS: `LOAD_FAVORITE_OFFERS`,
+  POST_FAVORITE_OFFER: `POST_FAVORITE_OFFER`,
+  ADD_FAVORITE_OFFER_ID: `ADD_FAVORITE_OFFER_ID`,
   LOAD_REVIEWS: `LOAD_REVIEWS`,
   POST_REVIEW: `POST_REVIEW`,
   CHANGE_CITY: `CITY_CHANGE`,
@@ -23,6 +26,18 @@ export const ActionCreator = {
   loadNearOffers: (offers) => ({
     type: ActionType.LOAD_NEAR_OFFERS,
     payload: offers,
+  }),
+  loadFavoriteOffers: (offers) => ({
+    type: ActionType.LOAD_FAVORITE_OFFERS,
+    payload: offers,
+  }),
+  postFavoriteOffer: (favoriteOfferStatus) => ({
+    type: ActionType.POST_FAVORITE_OFFER,
+    payload: favoriteOfferStatus,
+  }),
+  addFavoriteOfferId: (favoriteOfferId) => ({
+    type: ActionType.ADD_FAVORITE_OFFER_ID,
+    payload: favoriteOfferId,
   }),
   loadReviews: (reviews) => ({
     type: ActionType.LOAD_REVIEWS,

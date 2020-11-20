@@ -1,10 +1,10 @@
 import {extend} from "@utils/common";
 import {ActionType} from "@store/action";
-import {ReviewStatus} from "@src/const";
+import {PostStatus} from "@src/const";
 
 const initialState = {
   reviews: [],
-  reviewStatus: ReviewStatus.BEFORE_SENT
+  reviewStatus: PostStatus.BEFORE_SENT
 };
 
 const reviewsData = (state = initialState, action) => {
