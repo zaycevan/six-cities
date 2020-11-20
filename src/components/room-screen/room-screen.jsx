@@ -60,6 +60,7 @@ class RoomScreen extends React.PureComponent {
 
     const {
       id,
+      city,
       photos,
       title,
       description,
@@ -177,6 +178,7 @@ class RoomScreen extends React.PureComponent {
               </div>
             </div>
             <Map
+              currentCity={city}
               offersForCity={nearOffers}
               activeCardId={activeCardId}
               mapClassName="property__map"

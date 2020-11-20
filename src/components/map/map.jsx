@@ -1,10 +1,13 @@
-import {offersPropType} from "@utils/prop-types";
 import leaflet from "leaflet";
 import "leaflet/dist/leaflet.css";
+import {offersPropType} from "@utils/prop-types";
+import {CITIES_COORDINATES} from "@src/const";
 
 class Map extends React.PureComponent {
   _renderMap() {
-    const city = [52.38333, 4.9];
+    const {currentCity, offersForCity, activeCardId} = this.props;
+
+    const city = CITIES_COORDINATES[currentCity];
     const icon = leaflet.icon({
       iconUrl: `img/pin.svg`,
       iconSize: [30, 30]
@@ -13,15 +16,13 @@ class Map extends React.PureComponent {
       iconUrl: `img/pin-active.svg`,
       iconSize: [30, 30]
     });
-    const zoom = 12;
+    const zoom = 13;
     this._map = leaflet.map(`map`, {
       center: city,
       zoom,
       zoomControl: false,
       marker: true
     });
-
-    const {offersForCity, activeCardId} = this.props;
 
     let filteredOffers = offersForCity;
     let activeOffer = null;
@@ -71,6 +72,7 @@ class Map extends React.PureComponent {
 }
 
 Map.propTypes = {
+  currentCity: PropTypes.string.isRequired,
   offersForCity: offersPropType.isRequired,
   activeCardId: PropTypes.number,
   mapClassName: PropTypes.string.isRequired

@@ -34,6 +34,7 @@ const MainScreenWithOffers = (props) => {
       </section>
       <div className="cities__right-section">
         <Map
+          currentCity={currentCity}
           offersForCity={offersForCity}
           activeCardId={activeCardId}
           mapClassName="cities__map"
