@@ -16,8 +16,9 @@ export const ActionType = {
 };
 
 export const ActionCreator = {
-  getReadyApp: () => ({
+  getReadyApp: (appSatus) => ({
     type: ActionType.GET_READY_APP,
+    payload: appSatus,
   }),
   loadOffers: (offers) => ({
     type: ActionType.LOAD_OFFERS,

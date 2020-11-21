@@ -38,6 +38,6 @@ export const getUser = (state) => {
 };
 
 export const getAppStatus = (state) => {
-  return (state[NameSpace.APP].isAppReady);
+  return (state[NameSpace.APP].appStatus);
 };
 

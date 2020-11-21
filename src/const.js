@@ -64,3 +64,9 @@ export const PostStatus = {
   SENT: `SENT`,
   FAILURE: `FAILURE`,
 };
+
+export const AppStatus = {
+  APP_READY: `APP_READY`,
+  PAGE_READY: `PAGE_READY`,
+  NOT_READY: `NOT_READY`,
+};

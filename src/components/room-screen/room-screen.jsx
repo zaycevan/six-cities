@@ -2,12 +2,12 @@ import browserHistory from "@src/browser-history";
 import Header from "@components/header/header-connect";
 import ReviewsList from "@components/reviews-list/reviews-list";
 import withReviewFrom from "@hocs/with-review-form/with-review-form";
-import ReviewFrom from "@components/review-form/review-form";
+import ReviewFrom from "@components/review-form/review-form-connect";
 import Map from "@components/map/map";
 import PlacesList from "@components/places-list/places-list";
 import {getPluralWord} from "@utils/common";
 import {offerPropType, offersPropType, reviewsPropType} from "@utils/prop-types";
-import {PageType, SortType, AuthorizationStatus, AppRoute, PostStatus} from "@src/const";
+import {PageType, SortType, AuthorizationStatus, AppRoute, PostStatus, AppStatus} from "@src/const";
 
 const ReviewFromWrapped = withReviewFrom(ReviewFrom);
 
@@ -19,10 +19,9 @@ class RoomScreen extends React.PureComponent {
   }
 
   componentDidMount() {
-    const {offer, loadReviews, loadNearOffers} = this.props;
+    const {offer, loadData} = this.props;
 
-    loadReviews(offer.id);
-    loadNearOffers(offer.id);
+    loadData(offer.id);
   }
 
   _handleFavoriteButtonClick(evt) {
@@ -36,20 +35,18 @@ class RoomScreen extends React.PureComponent {
     onFavoriteButtonClick(offer.id, status);
   }
 
-  _isButtonDesabled() {
+  _isButtonDisabled() {
     const {favoriteOfferStatus} = this.props;
 
-    if (favoriteOfferStatus === PostStatus.PENDING) {
-      return true;
-    }
-
-    return false;
+    return favoriteOfferStatus === PostStatus.PENDING;
   }
 
   render() {
     const {
+      appStatus,
       offer,
       reviews,
+      reviewStatus,
       authorizationStatus,
       favoriteOfferStatus,
       nearOffers,
@@ -76,6 +73,10 @@ class RoomScreen extends React.PureComponent {
     } = offer;
 
     const PHOTO_COUNTS = 6;
+
+    if (appStatus !== AppStatus.PAGE_READY) {
+      return <div className="cities__status">...Loading</div>;
+    }
 
     return (
       <div className="page">
@@ -110,7 +111,7 @@ class RoomScreen extends React.PureComponent {
                     ${favoriteOfferStatus === PostStatus.FAILURE ? `shake` : ``}`}
                     type="button"
                     onClick={this._handleFavoriteButtonClick}
-                    disabled={this._isButtonDesabled()}>
+                    disabled={this._isButtonDisabled()}>
                     <svg className="property__bookmark-icon" width="31" height="33">
                       <use xlinkHref="#icon-bookmark"></use>
                     </svg>
@@ -171,7 +172,9 @@ class RoomScreen extends React.PureComponent {
                     reviews={reviews}
                   />
                   {authorizationStatus === AuthorizationStatus.AUTH ?
-                    <ReviewFromWrapped offerId={id} /> :
+                    <ReviewFromWrapped
+                      offerId={id}
+                      reviewStatus={reviewStatus}/> :
                     ``
                   }
                 </section>
@@ -204,10 +207,10 @@ class RoomScreen extends React.PureComponent {
 }
 
 RoomScreen.propTypes = {
-  loadReviews: PropTypes.func.isRequired,
-  loadNearOffers: PropTypes.func.isRequired,
+  loadData: PropTypes.func.isRequired,
   offer: offerPropType.isRequired,
   reviews: reviewsPropType.isRequired,
+  reviewStatus: PropTypes.string.isRequired,
   authorizationStatus: PropTypes.string.isRequired,
   onFavoriteButtonClick: PropTypes.func.isRequired,
   favoriteOfferStatus: PropTypes.string.isRequired,
@@ -215,6 +218,7 @@ RoomScreen.propTypes = {
   activeCardId: PropTypes.number,
   onActiveCard: PropTypes.func.isRequired,
   outActiveCard: PropTypes.func.isRequired,
+  appStatus: PropTypes.string.isRequired,
 };
 
 export {RoomScreen};

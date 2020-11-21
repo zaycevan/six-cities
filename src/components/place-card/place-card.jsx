@@ -32,12 +32,8 @@ const PlaceCard = (props) => {
     onFavoriteButtonClick(id, status);
   };
 
-  const isButtonDesabled = () => {
-    if (favoriteOfferStatus === PostStatus.PENDING) {
-      return true;
-    }
-
-    return false;
+  const isButtonDisabled = () => {
+    return favoriteOfferStatus === PostStatus.PENDING;
   };
 
   const isOnCard = () => {
@@ -88,7 +84,7 @@ const PlaceCard = (props) => {
             ${favoriteOfferStatus === PostStatus.FAILURE && favoriteOfferId === id ? `shake` : ``}`}
             type="button"
             onClick={handleFavoriteButtonClick}
-            disabled={isButtonDesabled()}>
+            disabled={isButtonDisabled()}>
             <svg className="place-card__bookmark-icon" width="18" height="19">
               <use xlinkHref="#icon-bookmark"></use>
             </svg>

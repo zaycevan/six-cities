@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {App} from "./app";
 
 const mapStateToProps = (state) => ({
-  isAppReady: getAppStatus(state),
+  appStatus: getAppStatus(state),
   offers: getOffers(state)
 });
 
