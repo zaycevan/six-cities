@@ -17,7 +17,7 @@ export const fetchReviews = (offerId) => (dispatch, _getState, api) => (
 
 export const postReview = (offerId, {comment, rating}) => (dispatch, _getState, api) => {
   dispatch(ActionCreator.postReview(PostStatus.PENDING));
-  api.post(`${APIRoute.COMMENTS}/${offerId}`, {comment, rating})
+  return api.post(`${APIRoute.COMMENTS}/${offerId}`, {comment, rating})
     .then(({data}) => {
       dispatch(ActionCreator.loadReviews(data.map(adaptReviewToClient)));
       dispatch(ActionCreator.postReview(PostStatus.SENT));
@@ -45,7 +45,7 @@ export const fetchFavoriteOffers = () => (dispatch, _getState, api) => (
 export const postFavoriteOffer = (offerId, status) => (dispatch, _getState, api) => {
   dispatch(ActionCreator.postFavoriteOffer(PostStatus.PENDING));
   dispatch(ActionCreator.addFavoriteOfferId(offerId));
-  api.post(`${APIRoute.FAVORITE}/${offerId}/${status}`)
+  return api.post(`${APIRoute.FAVORITE}/${offerId}/${status}`)
     .then(() => {
       dispatch(fetchFavoriteOffers());
       dispatch(fetchOffers());

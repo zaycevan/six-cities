@@ -11,18 +11,18 @@ const withSortOpen = (Component) => {
       this._handleClickOutside = this._handleClickOutside.bind(this);
     }
 
-    _handleOpenSort() {
-      this.setState({
-        sortOpen: !this.state.sortOpen,
-      });
-    }
-
     componentWillUnmount() {
       document.removeEventListener(`click`, this._handleClickOutside, false);
     }
 
     componentDidMount() {
       document.addEventListener(`click`, this._handleClickOutside, false);
+    }
+
+    _handleOpenSort() {
+      this.setState({
+        sortOpen: !this.state.sortOpen,
+      });
     }
 
     _handleClickOutside(evt) {

@@ -1,5 +1,5 @@
 import {ratingValue, ratingTitle} from "@src/const";
-import ReviewStar from "./review-star";
+import ReviewStar from "@components/review-star/review-star";
 import {PostStatus, CommentLength} from "@src/const";
 
 const ReviewFrom = (props) => {

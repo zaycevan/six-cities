@@ -13,6 +13,14 @@ const withReviewFrom = (Component) => {
       this._handleInputChange = this._handleInputChange.bind(this);
     }
 
+    componentDidUpdate() {
+      const {reviewStatus} = this.props;
+
+      if (reviewStatus === PostStatus.SENT) {
+        this._resetForm();
+      }
+    }
+
     _resetForm() {
       this.setState({
         comment: ``,
@@ -24,14 +32,6 @@ const withReviewFrom = (Component) => {
       evt.preventDefault();
       const {name, value} = evt.target;
       this.setState({[name]: value});
-    }
-
-    componentDidUpdate() {
-      const {reviewStatus} = this.props;
-
-      if (reviewStatus === PostStatus.SENT) {
-        this._resetForm();
-      }
     }
 
     render() {

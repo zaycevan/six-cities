@@ -4,7 +4,35 @@ import {offersPropType} from "@utils/prop-types";
 import {CITIES_COORDINATES} from "@src/const";
 
 class Map extends React.PureComponent {
-  _renderMap() {
+
+  componentDidMount() {
+    const {currentCity} = this.props;
+    const city = CITIES_COORDINATES[currentCity];
+    const zoom = 13;
+
+    this._map = leaflet.map(`map`, {
+      center: city,
+      zoom,
+      zoomControl: false,
+      marker: true
+    });
+    this._layerGroup = leaflet.layerGroup().addTo(this._map);
+
+    leaflet
+    .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
+      attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
+    })
+    .addTo(this._map);
+
+    this._setupMap();
+  }
+
+  componentDidUpdate() {
+    this._layerGroup.clearLayers();
+    this._setupMap();
+  }
+
+  _setupMap() {
     const {currentCity, offersForCity, activeCardId} = this.props;
 
     const city = CITIES_COORDINATES[currentCity];
@@ -17,12 +45,6 @@ class Map extends React.PureComponent {
       iconSize: [30, 30]
     });
     const zoom = 13;
-    this._map = leaflet.map(`map`, {
-      center: city,
-      zoom,
-      zoomControl: false,
-      marker: true
-    });
 
     let filteredOffers = offersForCity;
     let activeOffer = null;
@@ -33,12 +55,6 @@ class Map extends React.PureComponent {
     }
 
     this._map.setView(city, zoom);
-
-    leaflet
-      .tileLayer(`https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png`, {
-        attribution: `&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>`
-      })
-      .addTo(this._map);
 
     filteredOffers.forEach((offer) => {
       leaflet
@@ -51,15 +67,6 @@ class Map extends React.PureComponent {
         .marker(activeOffer.coordinates, {icon: activeIcon})
         .addTo(this._map);
     }
-  }
-
-  componentDidMount() {
-    this._renderMap();
-  }
-
-  componentDidUpdate() {
-    this._map.remove();
-    this._renderMap();
   }
 
   render() {
