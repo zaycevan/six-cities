@@ -19,7 +19,7 @@ it(`Should submit form when click submit button`, () => {
         onSubmit={handleSubmitAction}
         onChange={() => {}}
         comment={TestMockData.review.text}
-        rating={TestMockData.review.rating}
+        rating={`4`}
       />
   );
 
