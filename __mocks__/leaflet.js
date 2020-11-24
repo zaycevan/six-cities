@@ -12,6 +12,12 @@ leaflet.tileLayer = () => {
   };
 };
 
+leaflet.layerGroup = () => {
+  return {
+    addTo: () => {}
+  };
+};
+
 leaflet.marker = () => {
   return {
     addTo: () => {}
