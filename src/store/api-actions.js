@@ -2,6 +2,7 @@ import {ActionCreator} from "./action";
 import {AuthorizationStatus, APIRoute, AppRoute, PostStatus} from "@src/const";
 import {adaptOfferToClient} from "@utils/offers";
 import {adaptReviewToClient} from "@utils/reviews";
+import {showError} from "@utils/common";
 
 export const fetchOffers = () => (dispatch, _getState, api) => (
   api.get(APIRoute.HOTELS)
@@ -71,6 +72,12 @@ export const checkAuth = () => (dispatch, _getState, api) => (
 
 export const login = ({login: email, password}) => (dispatch, _getState, api) => (
   api.post(APIRoute.LOGIN, {email, password})
-    .then(() => dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH)))
+    .then(() => {
+      dispatch(ActionCreator.setUser(email));
+      dispatch(ActionCreator.requireAuthorization(AuthorizationStatus.AUTH));
+    })
     .then(() => dispatch(ActionCreator.redirectToRoute(AppRoute.ROOT)))
+    .catch((err) => {
+      showError(err);
+    })
 );

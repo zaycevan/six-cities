@@ -1,5 +1,6 @@
 import {createSelector} from "reselect";
 import {NameSpace} from "@store/reducers/root-reducer";
+import {getOffersForCity} from "@utils/common";
 
 export const getCurrentSort = (state) => (state[NameSpace.SORT].currentSort);
 
@@ -13,12 +14,9 @@ export const getCurrentCity = (state) => (state[NameSpace.CITIES].currentCity);
 
 export const getOffers = (state) => (state[NameSpace.OFFERS].offers);
 
-export const filteredCityOffers = (city, offers) => {
-  return offers.filter((offer) => offer.city === city);
-};
-export const filteredCityOffersSelector = createSelector(
+export const getOffersForCurrentCity = createSelector(
     [getCurrentCity, getOffers],
-    (currentCity, offers) => (filteredCityOffers(currentCity, offers))
+    (currentCity, offers) => (getOffersForCity(currentCity, offers))
 );
 
 export const getFavoriteOffers = (state) => (state[NameSpace.OFFERS].favoriteOffers);

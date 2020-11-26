@@ -14,13 +14,14 @@ const mockEvent = {
   preventDefault() {}
 };
 
-it(`Should submit login form when click submit button`, () => {
+it(`Should not submit login form without data`, () => {
   const handleSubmitAction = jest.fn();
 
   const wrapper = mount(
       <Provider store={store}>
         <Router history={browserHistory}>
           <SignInScreen
+            authorizationStatus={`NO_AUTH`}
             currentCity={TestMockData.currentCity}
             onSubmit={handleSubmitAction}
           />
@@ -29,5 +30,53 @@ it(`Should submit login form when click submit button`, () => {
   );
 
   wrapper.find(`.login__form`).simulate(`submit`, mockEvent);
+  expect(handleSubmitAction).toHaveBeenCalledTimes(0);
+});
+
+it(`Should not submit login form without password`, () => {
+  const handleSubmitAction = jest.fn();
+
+  const wrapper = mount(
+      <Provider store={store}>
+        <Router history={browserHistory}>
+          <SignInScreen
+            authorizationStatus={`NO_AUTH`}
+            currentCity={TestMockData.currentCity}
+            onSubmit={handleSubmitAction}
+          />
+        </Router>
+      </Provider>
+  );
+
+  wrapper.find(`#email`).instance().value = `zzz@zz.ru`;
+  wrapper.find(`#password`).instance().value = ``;
+
+  wrapper.find(`.login__form`).simulate(`submit`, mockEvent);
+  expect(handleSubmitAction).toHaveBeenCalledTimes(0);
+});
+
+it(`Should submit login form with correct data`, () => {
+  const handleSubmitAction = jest.fn();
+
+  const wrapper = mount(
+      <Provider store={store}>
+        <Router history={browserHistory}>
+          <SignInScreen
+            authorizationStatus={`NO_AUTH`}
+            currentCity={TestMockData.currentCity}
+            onSubmit={handleSubmitAction}
+          />
+        </Router>
+      </Provider>
+  );
+
+  wrapper.find(`#email`).instance().value = `zzz@zz.ru`;
+  wrapper.find(`#password`).instance().value = `123`;
+
+  wrapper.find(`.login__form`).simulate(`submit`, mockEvent);
+  expect(handleSubmitAction).toHaveBeenCalledWith({
+    login: `zzz@zz.ru`,
+    password: `123`,
+  });
   expect(handleSubmitAction).toHaveBeenCalledTimes(1);
 });

@@ -51,7 +51,20 @@ export const sortReviewsByDate = (reviewA, reviewB) => {
   return dataDiff;
 };
 
-
 export const extend = (a, b) => {
   return Object.assign({}, a, b);
+};
+
+export const isValidEmail = (email) => {
+  const EMAIL_REGEXP = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2})$/;
+
+  return EMAIL_REGEXP.test(email);
+};
+
+export const showError = (err) => {
+  return (<p>{err}</p>);
+};
+
+export const getOffersForCity = (city, offers) => {
+  return offers.filter((offer) => offer.city === city);
 };

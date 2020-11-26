@@ -1,6 +1,6 @@
 import FavoritesItem from "@components/favorites-item/favorites-item";
 import {offersPropType} from "@utils/prop-types";
-import {filteredCityOffers} from "@store/selectors";
+import {getOffersForCity} from "@utils/common";
 
 const FavoritesList = (props) => {
   const {
@@ -14,7 +14,7 @@ const FavoritesList = (props) => {
         <FavoritesItem
           key={`${city}-${i}`}
           city={city}
-          favoriteCityOffers={filteredCityOffers(city, favoriteOffers)}
+          favoriteCityOffers={getOffersForCity(city, favoriteOffers)}
         />
       ))}
     </ul>

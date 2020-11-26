@@ -1,6 +1,7 @@
-import {Link} from "react-router-dom";
+import {Link, Redirect} from "react-router-dom";
 import Header from "@components/header/header-connect";
-import {PageType, AppRoute} from "@src/const";
+import {PageType, AppRoute, AuthorizationStatus} from "@src/const";
+import {isValidEmail} from "@utils/common";
 
 class SignInScreen extends React.PureComponent {
   constructor(props) {
@@ -9,21 +10,40 @@ class SignInScreen extends React.PureComponent {
     this.loginRef = React.createRef();
     this.passwordRef = React.createRef();
 
+    this._handleInput = this._handleInput.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
+  }
+
+  _handleInput(evt) {
+    if (!isValidEmail(this.loginRef.current.value)) {
+      evt.target.setCustomValidity(`Please enter valid email "login@domen.ru"`);
+    } else {
+      evt.target.setCustomValidity(``);
+    }
   }
 
   _handleSubmit(evt) {
     const {onSubmit} = this.props;
+    const login = this.loginRef.current.value;
+    const password = this.passwordRef.current.value;
 
     evt.preventDefault();
-    onSubmit({
-      login: this.loginRef.current.value,
-      password: this.passwordRef.current.value,
-    });
+    if (isValidEmail(login) && password.length > 0) {
+      onSubmit({
+        login,
+        password,
+      });
+    }
   }
 
   render() {
-    const {currentCity} = this.props;
+    const {authorizationStatus, currentCity} = this.props;
+
+    if (authorizationStatus === AuthorizationStatus.AUTH) {
+      return (
+        <Redirect to={AppRoute.ROOT} />
+      );
+    }
 
     return (
       <div className="page page--gray page--login">
@@ -50,7 +70,8 @@ class SignInScreen extends React.PureComponent {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    required=""
+                    required
+                    onInput={this._handleInput}
                   />
                 </div>
                 <div className="login__input-wrapper form__input-wrapper">
@@ -62,7 +83,7 @@ class SignInScreen extends React.PureComponent {
                     name="password"
                     id="password"
                     placeholder="Password"
-                    required=""
+                    required
                   />
                 </div>
                 <button className="login__submit form__submit button" type="submit">Sign in</button>
@@ -83,6 +104,7 @@ class SignInScreen extends React.PureComponent {
 }
 
 SignInScreen.propTypes = {
+  authorizationStatus: PropTypes.string.isRequired,
   currentCity: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
 };
