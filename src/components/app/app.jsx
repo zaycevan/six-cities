@@ -11,52 +11,50 @@ import {offersPropType} from "@utils/prop-types";
 
 const RoomScreenWrapped = withActiveCard(RoomScreen);
 
-class App extends React.PureComponent {
-  componentDidMount() {
-    const {initApp} = this.props;
+const App = (props) => {
 
+  React.useEffect(() => {
+    const {initApp} = props;
     initApp();
+  }, []);
+
+  const {appStatus, offers} = props;
+
+  if (appStatus === AppStatus.NOT_READY) {
+    return <div className="cities__status">...Loading</div>;
   }
 
-  render() {
-    const {appStatus, offers} = this.props;
-
-    if (appStatus === AppStatus.NOT_READY) {
-      return <div className="cities__status">...Loading</div>;
-    }
-
-    return (
-      <BrowserRouter history={browserHistory}>
-        <Switch>
-          <Route exact path={AppRoute.ROOT}>
-            <MainScreen />
-          </Route>
-          <Route exact path={AppRoute.LOGIN}>
-            <SignInScreen />
-          </Route>
-          <PrivateRoute
-            exact
-            path={AppRoute.FAVORITES}
-            render={() => {
-              return (
-                <FavoritesScreen />
-              );
-            }}
-          />
-          <Route exact path={AppRoute.OFFER + `:id`}
-            render={({match}) => {
-              const offer = offers.find((item) => +item.id === +match.params.id);
-              return <RoomScreenWrapped
-                offer={offer}
-                key={offer.id}
-              />;
-            }}
-          />
-        </Switch>
-      </BrowserRouter>
-    );
-  }
-}
+  return (
+    <BrowserRouter history={browserHistory}>
+      <Switch>
+        <Route exact path={AppRoute.ROOT}>
+          <MainScreen />
+        </Route>
+        <Route exact path={AppRoute.LOGIN}>
+          <SignInScreen />
+        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.FAVORITES}
+          render={() => {
+            return (
+              <FavoritesScreen />
+            );
+          }}
+        />
+        <Route exact path={AppRoute.OFFER + `:id`}
+          render={({match}) => {
+            const offer = offers.find((item) => +item.id === +match.params.id);
+            return <RoomScreenWrapped
+              offer={offer}
+              key={offer.id}
+            />;
+          }}
+        />
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
 App.propTypes = {
   initApp: PropTypes.func.isRequired,

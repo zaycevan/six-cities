@@ -1,50 +1,33 @@
 const withSortOpen = (Component) => {
-  class WithSortOpen extends React.PureComponent {
-    constructor(props) {
-      super(props);
+  const WithSortOpen = (props) => {
+    const [sortOpen, setSortOpen] = React.useState(false);
 
-      this.state = {
-        sortOpen: false,
+    React.useEffect(() => {
+      const handleClickOutside = (evt) => {
+        if (sortOpen && !evt.target.classList.contains(`places__option`) && !evt.target.classList.contains(`places__sorting-type`)) {
+          setSortOpen(false);
+        }
       };
 
-      this._handleOpenSort = this._handleOpenSort.bind(this);
-      this._handleClickOutside = this._handleClickOutside.bind(this);
-    }
+      document.addEventListener(`click`, handleClickOutside, false);
 
-    componentWillUnmount() {
-      document.removeEventListener(`click`, this._handleClickOutside, false);
-    }
+      return () => {
+        document.removeEventListener(`click`, handleClickOutside, false);
+      };
+    }, [sortOpen]);
 
-    componentDidMount() {
-      document.addEventListener(`click`, this._handleClickOutside, false);
-    }
+    const handleOpenSort = () => {
+      setSortOpen((prevState) => !prevState);
+    };
 
-    _handleOpenSort() {
-      this.setState({
-        sortOpen: !this.state.sortOpen,
-      });
-    }
-
-    _handleClickOutside(evt) {
-      if (this.state.sortOpen && !evt.target.classList.contains(`places__option`) && !evt.target.classList.contains(`places__sorting-type`)) {
-        this.setState({
-          sortOpen: false,
-        });
-      }
-    }
-
-    render() {
-      const {sortOpen} = this.state;
-
-      return (
-        <Component
-          {...this.props}
-          sortOpen={sortOpen}
-          onOpenSort={this._handleOpenSort}
-        />
-      );
-    }
-  }
+    return (
+      <Component
+        {...props}
+        sortOpen={sortOpen}
+        onOpenSort={handleOpenSort}
+      />
+    );
+  };
 
   return WithSortOpen;
 };

@@ -22,7 +22,6 @@ exports[`Should ReviewFrom render correctly 1`] = `
       disabled={false}
       id="5-stars"
       name="rating"
-      onChange={[Function]}
       type="radio"
       value={5}
     />
@@ -46,7 +45,6 @@ exports[`Should ReviewFrom render correctly 1`] = `
       disabled={false}
       id="4-stars"
       name="rating"
-      onChange={[Function]}
       type="radio"
       value={4}
     />
@@ -70,7 +68,6 @@ exports[`Should ReviewFrom render correctly 1`] = `
       disabled={false}
       id="3-stars"
       name="rating"
-      onChange={[Function]}
       type="radio"
       value={3}
     />
@@ -94,7 +91,6 @@ exports[`Should ReviewFrom render correctly 1`] = `
       disabled={false}
       id="2-stars"
       name="rating"
-      onChange={[Function]}
       type="radio"
       value={2}
     />
@@ -118,7 +114,6 @@ exports[`Should ReviewFrom render correctly 1`] = `
       disabled={false}
       id="1-stars"
       name="rating"
-      onChange={[Function]}
       type="radio"
       value={1}
     />
@@ -145,7 +140,6 @@ exports[`Should ReviewFrom render correctly 1`] = `
     maxLength={300}
     minLength={50}
     name="comment"
-    onChange={[Function]}
     placeholder="Tell how was your stay, what you like and what can be improved"
     value="The house is very good, very happy, hygienic and simple living conditions around it are also very good. I hope to have the opportunity to come back. Thank you."
   />

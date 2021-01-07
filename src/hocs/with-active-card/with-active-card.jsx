@@ -1,43 +1,23 @@
 const withActiveCard = (Component) => {
-  class WithActiveCard extends React.PureComponent {
-    constructor(props) {
-      super(props);
+  const WithActiveCard = (props) => {
+    const [activeCardId, setActiveCardId] = React.useState();
 
-      this.state = {
-        activeCardId: null,
-      };
+    const onActiveCard = (id) => {
+      setActiveCardId(id);
+    };
 
-      this._onActiveCard = this._onActiveCard.bind(this);
-      this._outActiveCard = this._outActiveCard.bind(this);
-    }
+    const outActiveCard = () => {
+      setActiveCardId(null);
+    };
 
-    _onActiveCard(id) {
-      this.setState({
-        activeCardId: id,
-      });
-    }
-
-    _outActiveCard() {
-      this.setState({
-        activeCardId: null,
-      });
-    }
-
-    render() {
-      const {activeCardId} = this.state;
-
-      return (
-        <Component
-          {...this.props}
-          activeCardId={activeCardId}
-          onActiveCard={this._onActiveCard}
-          outActiveCard={this._outActiveCard}
-        />
-      );
-    }
-  }
-
-  WithActiveCard.propTypes = {
+    return (
+      <Component
+        {...props}
+        activeCardId={activeCardId}
+        onActiveCard={onActiveCard}
+        outActiveCard={outActiveCard}
+      />
+    );
   };
 
   return WithActiveCard;

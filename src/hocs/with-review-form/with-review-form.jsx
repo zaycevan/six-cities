@@ -1,52 +1,44 @@
 import {PostStatus} from "@src/const";
 
 const withReviewFrom = (Component) => {
-  class WithReviewFrom extends React.PureComponent {
-    constructor(props) {
-      super(props);
+  const WithReviewFrom = (props) => {
+    const [rating, setRating] = React.useState(``);
+    const [comment, setComment] = React.useState(``);
 
-      this.state = {
-        rating: ``,
-        comment: ``,
-      };
-
-      this._handleInputChange = this._handleInputChange.bind(this);
-    }
-
-    componentDidUpdate() {
-      const {reviewStatus} = this.props;
-
+    React.useEffect(() => {
+      const {reviewStatus} = props;
       if (reviewStatus === PostStatus.SENT) {
-        this._resetForm();
+        resetForm();
       }
-    }
+    });
 
-    _resetForm() {
-      this.setState({
-        comment: ``,
-        rating: ``,
-      });
-    }
+    const resetForm = () => {
+      setRating(``);
+      setComment(``);
+    };
 
-    _handleInputChange(evt) {
+    const handleRatingChange = (evt) => {
       evt.preventDefault();
-      const {name, value} = evt.target;
-      this.setState({[name]: value});
-    }
+      const {value} = evt.target;
+      setRating(value);
+    };
 
-    render() {
-      const {comment, rating} = this.state;
+    const handleCommentChange = (evt) => {
+      evt.preventDefault();
+      const {value} = evt.target;
+      setComment(value);
+    };
 
-      return (
-        <Component
-          {...this.props}
-          onChange={this._handleInputChange}
-          comment={comment}
-          rating={rating}
-        />
-      );
-    }
-  }
+    return (
+      <Component
+        {...props}
+        onRatingChange={handleRatingChange}
+        onCommentChange={handleCommentChange}
+        comment={comment}
+        rating={rating}
+      />
+    );
+  };
 
   WithReviewFrom.propTypes = {
     offerId: PropTypes.number.isRequired,

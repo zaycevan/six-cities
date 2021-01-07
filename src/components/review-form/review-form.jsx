@@ -7,7 +7,8 @@ const ReviewFrom = (props) => {
     reviewStatus,
     offerId,
     onSubmit,
-    onChange,
+    onRatingChange,
+    onCommentChange,
     comment,
     rating
   } = props;
@@ -36,14 +37,14 @@ const ReviewFrom = (props) => {
             key={item}
             id={item}
             title={ratingTitle[i]}
-            onChange={onChange}
+            onChange={onRatingChange}
             disabled={isFormDisabled()}
             rating={rating}
           />
         ))}
       </div>
       <textarea className="reviews__textarea form__textarea" id="comment" name="comment" placeholder="Tell how was your stay, what you like and what can be improved" maxLength={300} minLength={50}
-        onChange={onChange}
+        onChange={onCommentChange}
         value={comment}
         disabled={isFormDisabled()}
       ></textarea>
@@ -61,7 +62,8 @@ ReviewFrom.propTypes = {
   reviewStatus: PropTypes.string.isRequired,
   offerId: PropTypes.number.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
+  onRatingChange: PropTypes.func.isRequired,
+  onCommentChange: PropTypes.func.isRequired,
   comment: PropTypes.string.isRequired,
   rating: PropTypes.string.isRequired,
 };
